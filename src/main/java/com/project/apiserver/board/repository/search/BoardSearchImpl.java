@@ -70,4 +70,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
 
     }
 
+
+    
+
 }
