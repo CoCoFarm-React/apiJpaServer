@@ -19,12 +19,14 @@ public class BoardListDTO {
 
     private Long bno;
     private String title;
-    
     private String email;
     private String nickname;
     private String catename;
+    private Integer cateno;
+    private Long rcnt;
+
+    
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regDate;
-    
-}
+}    

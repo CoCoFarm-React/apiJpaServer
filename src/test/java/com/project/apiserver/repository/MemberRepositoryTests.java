@@ -1,62 +1,77 @@
 package com.project.apiserver.repository;
 
-import java.util.List;
 
+import com.project.apiserver.member.entity.MemberAccount;
+import com.project.apiserver.member.entity.MemberRole;
+import com.project.apiserver.member.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.project.apiserver.member.entity.Member;
-import com.project.apiserver.member.entity.MemberRole;
-import com.project.apiserver.member.repository.MemberRepository;
 
 import jakarta.transaction.Transactional;
-import lombok.extern.log4j.Log4j2;
+
+
+
+
+
 
 @SpringBootTest
-@Log4j2
+
 public class MemberRepositoryTests {
     
     @Autowired
     private MemberRepository repository;
 
-    // @Test
-    // public void insertTest(){
+    @Test
+    public void insertTest(){
 
-    //     for(int i = 0; i<100; i++){
-    //     Member member = Member.builder()
-    //     .email("aaa" +i+"@email.com")
-    //     .pw("1111")
-    //     .nickname("nickname"+ i)
-    //     .build();
+        for(int i = 0; i<100; i++){
+        MemberAccount member = MemberAccount.builder()
+        .email("aaa" +i+"@email.com")
+        .pw("1111")
+        .nickname("nickname"+ i)
+        .intro("자소개" + i)
+        .build();
 
-    //     switch(i%2){
+        switch(i%2){
 
-    //         case 0:
-    //         member.addRole(MemberRole.FARMER);
-    //         break;
-    //         case 1:
-    //         member.addRole(MemberRole.CONSUMER);
-    //         break;
-    //     }
+            case 0:
+                member.addRole(MemberRole.FARMER);
+            break;
+            case 1:
+                member.addRole(MemberRole.CONSUMER);
+            break;
+        }
         
-    //     repository.save(member);
-    //     }
-    // }
+        repository.save(member);
+        }
+    }
 
 
     @Test
     @Transactional
     public void readTest(){
 
-        // List<Member> list = repository.findAll();
+        // List<MemberAccount> list = repository.findAll();
         // log.info(list);
         // log.info("----------");
         // list.forEach(mb ->log.info(mb.getRole()));
         
-        List<Member> list = repository.findByRole(MemberRole.CONSUMER);
+        //List<MemberAccount> list = repository.findByRole(MemberAccountRole.CONSUMER);
 
-        log.info(list);
-        list.forEach(member->log.info(member.getRole()));
+        //log.info(list);
+        //list.forEach(MemberAccount->log.info(MemberAccount.getRole()));
     }
+
+
+    // @Test
+    // @Transactional
+    // public void getSearchList(){
+
+    //     MemberPageRequestDTO MemberAccountPageRequestDTO = new MemberPageRequestDTO(1,10);
+
+    //     repository.searchMember();
+    
+    // }
 }

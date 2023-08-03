@@ -37,5 +37,11 @@ public class AdminMemberContoller {
 
          return memberService.getList(role);
     }
-    
+
+
+    @GetMapping("memberOne")
+    public MemberDTO getFarmerOne(Long mno){
+
+         return memberService.getOne(mno);
+    }    
 }

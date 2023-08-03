@@ -18,7 +18,11 @@ public interface BoardSearch {
     // Pageable을 계속쓰게되므로 반복해서 편히 쓰기위해서 default 접근제한자로 선언후 사용
     default Pageable makePageable(PageRequestDTO pageRequestDTO){
 
-        Pageable pageable = PageRequest.of(pageRequestDTO.getPage()-1, pageRequestDTO.getSize(), Sort.by("bno").descending());
+        Pageable pageable = 
+            PageRequest.of(
+                pageRequestDTO.getPage()-1, 
+                pageRequestDTO.getSize(), 
+                Sort.by("category.cateno").descending().and(Sort.by("bno").descending()));
         
         return pageable;
     } 

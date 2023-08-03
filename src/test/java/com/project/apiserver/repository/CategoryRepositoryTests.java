@@ -14,12 +14,12 @@ public class CategoryRepositoryTests {
     @Autowired(required = false)
     private CategoryRepository categoryRepository;
 
-    // @Test
-    // public void insertTest(){
+    @Test
+    public void insertTest(){
     
-    //     Category category = Category.builder().catename("공지사항").build();
+        Category category = Category.builder().catename("공지사항").build();
 
-    //     categoryRepository.save(category);
-    // }
+        categoryRepository.save(category);
+    }
     
 }

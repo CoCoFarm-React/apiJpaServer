@@ -2,8 +2,9 @@ package com.project.apiserver.board.entity;
 
 import com.project.apiserver.common.BaseEntity;
 import com.project.apiserver.common.Category;
-import com.project.apiserver.member.entity.Member;
 
+
+import com.project.apiserver.member.entity.MemberAccount;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -30,9 +31,20 @@ public class Board extends BaseEntity {
     private String title;
     private String content;
 
+    private boolean delFlag;
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
+    private MemberAccount member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
+
+    public void changeDelFlag(boolean delFlag) {
+        this.delFlag = delFlag;
+    }
+    public void changeTitle(String title){
+        this.title = title;
+    }
+    public void changeContent(String content){
+        this.content = content;
+    }
 }

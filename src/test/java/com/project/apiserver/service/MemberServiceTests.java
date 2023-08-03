@@ -25,5 +25,14 @@ public class MemberServiceTests {
         MemberRole role = MemberRole.valueOf(value);
        log.info(service.getList(role)); 
     }
+
+
+    ///api/admin/memberOne
+    @Test
+    @Transactional
+    public void getOneTest(){
+        log.info(service.getOne(50L)); 
+    }
+    
 }
 

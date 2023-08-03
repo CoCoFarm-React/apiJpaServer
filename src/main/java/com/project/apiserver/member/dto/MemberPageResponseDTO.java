@@ -1,4 +1,4 @@
-package com.project.apiserver.common;
+package com.project.apiserver.member.dto;
 
 
 import java.util.List;
@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data
 
-public class PageResponseDTO<E> {
+public class MemberPageResponseDTO<E> {
     
     private List<E> dtoList;
     
@@ -22,12 +22,12 @@ public class PageResponseDTO<E> {
 
     private boolean prev, next;
     
-    private PageRequestDTO requestDTO;
+    private MemberPageRequestDTO requestDTO;
     
     private int page, size, start, end;
 
 
-    public PageResponseDTO(List<E> dtoList, long totalCount, PageRequestDTO pageRequestDTO){
+    public MemberPageResponseDTO(List<E> dtoList, long totalCount, MemberPageRequestDTO pageRequestDTO){
        
         this.dtoList = dtoList;
         this.totalCount = totalCount;

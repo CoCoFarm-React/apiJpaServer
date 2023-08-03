@@ -11,4 +11,8 @@ import jakarta.transaction.Transactional;
 public interface MemberService {
     
     List<MemberDTO> getList(MemberRole memberRole);
+
+    MemberDTO getOne(Long mno);
+
+
 }

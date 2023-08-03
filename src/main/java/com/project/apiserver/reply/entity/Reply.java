@@ -2,8 +2,9 @@ package com.project.apiserver.reply.entity;
 
 import com.project.apiserver.board.entity.Board;
 import com.project.apiserver.common.BaseEntity;
-import com.project.apiserver.member.entity.Member;
 
+
+import com.project.apiserver.member.entity.MemberAccount;
 import groovy.transform.ToString;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -20,19 +22,29 @@ import lombok.NoArgsConstructor;
 @ToString(excludes = {"member", "board"})
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class Reply extends BaseEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rno;
     private String reply;
-    private Integer ord;
+    private boolean ord;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
+    private MemberAccount member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Board board;
 
+    private boolean delFlag;
+
+    public void changeDelFlag(boolean delFlag) {
+        this.delFlag = delFlag;
+    }
+
+    public void changeReply(String reply) {
+        this.reply = reply;
+    }
 
 }

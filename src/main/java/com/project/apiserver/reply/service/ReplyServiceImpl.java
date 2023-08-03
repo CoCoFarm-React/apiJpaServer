@@ -1,6 +1,7 @@
 package com.project.apiserver.reply.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -22,37 +23,86 @@ import lombok.extern.log4j.Log4j2;
 @Service
 @Log4j2
 @RequiredArgsConstructor
-public class ReplyServiceImpl implements ReplyService {
-    
+public class ReplyServiceImpl extends Exception implements ReplyService{
+
     private final ReplyRepository replyRepository;
     private final ModelMapper modelMapper;
 
     @Override
-    public PageResponseDTO<ReplyDTO> replyList(ReplyPageRequestDTO requestDTO) {
+    public PageResponseDTO<ReplyDTO> getReplyList(ReplyPageRequestDTO requestDTO) {
 
         boolean last = requestDTO.isLast();
         int pageNum = requestDTO.getPage();
-        
-        if(last) {
+
+        if (last) {
             long totalCount = replyRepository.getCountReply(requestDTO.getBno());
-            
-            pageNum = (int)(Math.ceil(totalCount / (double) requestDTO.getSize()));
+
+            pageNum = (int) (Math.ceil(totalCount / (double) requestDTO.getSize()));
             pageNum = pageNum <= 0 ? 1 : pageNum;
         }
 
         Pageable pageable = PageRequest.of(pageNum - 1, requestDTO.getSize(), Sort.by("rno").ascending());
 
-        Page<Object[]> result = replyRepository.getReplyList(requestDTO.getBno(), pageable);
+        Page<ReplyDTO> result = replyRepository.getReplyList(requestDTO.getBno(), pageable);
+        log.info(result.toString());
 
         long totalReplyCount = result.getTotalElements();
 
-        List<ReplyDTO> dtoList = result.get().map(dto -> 
-            modelMapper.map(dto, ReplyDTO.class)).collect(Collectors.toList());
-
+        List<ReplyDTO> dtoList = result.stream().map(dto -> modelMapper.map(dto, ReplyDTO.class))
+                .collect(Collectors.toList());
+        log.info(dtoList);
         PageResponseDTO<ReplyDTO> responseDTO = new PageResponseDTO<>(dtoList, totalReplyCount, requestDTO);
         responseDTO.setPage(pageNum);
 
         return responseDTO;
+
+    }
+
+    @Override
+    public void registReply(ReplyDTO replyDTO) {
+
+        Reply reply = modelMapper.map(replyDTO, Reply.class);
+
+        log.info(reply);
+
+        replyRepository.save(reply);
+
+    }
+
+    // 댓글 삭제
+    @Override
+    public void deleteReply(Long rno) {
+
+        Optional<Reply> result = replyRepository.findById(rno);
+
+        Reply reply = result.orElseThrow();
+
+        reply.changeDelFlag(true);
+        reply.changeReply("삭제되었습니다.");
+        
+
+        replyRepository.save(reply);
+
+    }
+
+    // 댓글 수정
+    @Override
+    public void modifyReply(ReplyDTO replyDTO) {
+
+        Optional<Reply> result = replyRepository.findById(replyDTO.getRno());
+
+        Reply reply = result.orElseThrow();
+
+        // 삭제된 댓글은 수정을 할 수 없다.
+
+        log.info("===============================================" + replyDTO.isDelFlag());
+        if(replyDTO.isDelFlag()){
+            throw new RuntimeException("삭제된 댓글 입니다.");
+        }
+
+        reply.changeReply(replyDTO.getReply());
+        
+        replyRepository.save(reply);
 
     }
 
