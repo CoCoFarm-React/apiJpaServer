@@ -33,12 +33,11 @@ public class ReplyRepositoryTests {
 
         Board board = Board.builder().bno(109L).build();
         MemberAccount member = MemberAccount.builder().mno(11L).build();
-
         for(int i=0; i<100; i++) {
 
             Reply reply = Reply.builder()
                 .reply("test reply" + i)
-                .ord(true)
+                .ord(Boolean.FALSE)
                 .board(board)
                 .member(member)
                 .build();

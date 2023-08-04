@@ -48,5 +48,8 @@ public class Reply extends BaseEntity {
     public void changeReply(String reply) {
         this.reply = reply;
     }
+    public void changeOrd (boolean ord){
+        this.ord = ord;
+    }
 
 }
