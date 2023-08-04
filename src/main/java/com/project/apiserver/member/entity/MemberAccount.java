@@ -1,13 +1,10 @@
 package com.project.apiserver.member.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.project.apiserver.common.BaseEntity;
+import com.project.apiserver.member.dto.MemberAccountRole;
 
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,13 +17,13 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "tbl_member")
+@Table(name = "tbl_member_account")
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"role"})
-public class MemberAccount {
+@ToString
+public class MemberAccount extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,22 +34,33 @@ public class MemberAccount {
     private String pw;
     private String nickname;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    @Enumerated(EnumType.STRING)
-    @Builder.Default
-    private List<MemberRole> role = new ArrayList<>();
-
     private String intro;
 
-    // Role 추가하는 메소드
-    public void addRole (MemberRole data){
+    private boolean delFlag;
 
-        MemberRole addrole = data;
+    private String roleName;
 
-        role.add(addrole);
-        
+    // private String intro;
+
+    // // Role 추가하는 메소드
+    public void changeRole(MemberAccountRole role) {
+
+        roleName = role.getRoleName();
+
     }
-    
+
+    public void changeNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void changePw(String pw) {
+        this.pw = pw;
+    }
+    public void changeIntro(String intro){
+        this.intro = intro;
+    }
+    public void delete(){
+        this.delFlag = true;
+    }
+
 }
-
-
