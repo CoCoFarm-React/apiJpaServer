@@ -75,6 +75,7 @@ public class MemberSearchImpl extends QuerydslRepositorySupport implements Membe
         ));
         List<MemberAccountDTO> listquery = queryDto.fetch();
         long totalCount = queryDto.fetchCount();
+        log.info(listquery);
         
         return new MemberPageResponseDTO<>(listquery, totalCount, requestDTO);
 

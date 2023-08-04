@@ -20,11 +20,13 @@ import com.project.apiserver.member.dto.MemberPageResponseDTO;
 import com.project.apiserver.member.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @RestController
 @RequestMapping("/api/admin/")
 @RequiredArgsConstructor
 @CrossOrigin
+@Log4j2
 public class AdminMemberContoller {
 
 
@@ -33,7 +35,7 @@ public class AdminMemberContoller {
 
     @GetMapping("farmer")
     public MemberPageResponseDTO<MemberAccountDTO> getFarmerList(@ParameterObject MemberPageRequestDTO memberPageRequestDTO){
-
+        log.info("test");
         memberPageRequestDTO.setRoleName("FARMER"); 
         
         return memberService.getMemberList(memberPageRequestDTO);

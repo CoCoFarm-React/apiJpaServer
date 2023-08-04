@@ -19,12 +19,14 @@ import com.project.apiserver.common.PageRequestDTO;
 import com.project.apiserver.common.PageResponseDTO;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @RestController
 
 @RequiredArgsConstructor
 @RequestMapping("/api/board/")
 @CrossOrigin
+@Log4j2
 public class BoardController {
 
     private final BoardService boardService;
@@ -32,7 +34,8 @@ public class BoardController {
     // 하나만
     @GetMapping("{bno}")
     public BoardReadDTO getOne(@PathVariable("bno") Long bno) {
-
+        log.info("----------------------------------");
+        log.info(bno);
         return boardService.getOne(bno);
     }
 
