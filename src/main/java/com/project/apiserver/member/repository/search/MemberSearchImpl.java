@@ -39,7 +39,9 @@ public class MemberSearchImpl extends QuerydslRepositorySupport implements Membe
 
         JPQLQuery<MemberAccount> searchQuery = from(account);
         searchQuery.where(account.delFlag.eq(Boolean.FALSE));
-        if (roleName != null) searchQuery.where(account.roleName.eq(roleName));
+        if (roleName != null) {
+            searchQuery.where(account.roleName.eq(roleName));
+        }
         if (keyword != null && searchType != null) {
 
             BooleanBuilder searchBuilder = new BooleanBuilder();

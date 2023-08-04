@@ -28,7 +28,7 @@ public class MemberRepositoryTests {
     @Test
     public void insertTest(){
 
-        for(int i = 0; i<10; i++){
+        for(int i = 0; i<500; i++){
         MemberAccount member = MemberAccount.builder()
         .email("aaa" +i+"@email.com")
         .pw("1111")

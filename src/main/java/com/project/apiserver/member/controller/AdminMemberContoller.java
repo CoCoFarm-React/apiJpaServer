@@ -3,6 +3,7 @@ package com.project.apiserver.member.controller;
 
 import java.util.Map;
 
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,7 @@ public class AdminMemberContoller {
 
 
     @GetMapping("farmer")
-    public MemberPageResponseDTO<MemberAccountDTO> getFarmerList(MemberPageRequestDTO memberPageRequestDTO){
+    public MemberPageResponseDTO<MemberAccountDTO> getFarmerList(@ParameterObject MemberPageRequestDTO memberPageRequestDTO){
 
         memberPageRequestDTO.setRoleName("FARMER"); 
         
@@ -40,7 +41,7 @@ public class AdminMemberContoller {
     }
 
     @GetMapping("consumer")
-    public MemberPageResponseDTO<MemberAccountDTO> getConsumerList(MemberPageRequestDTO pageRequestDTO){
+    public MemberPageResponseDTO<MemberAccountDTO> getConsumerList(@ParameterObject MemberPageRequestDTO pageRequestDTO){
 
         pageRequestDTO.setRoleName("CONSUMER");
         
