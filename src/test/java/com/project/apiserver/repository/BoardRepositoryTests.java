@@ -32,7 +32,7 @@ public class BoardRepositoryTests {
         .catename("관리자문의")
         .build();
 
-        MemberAccount member = MemberAccount.builder().mno(1L).build();
+        MemberAccount member = MemberAccount.builder().mno(2L).build();
         
         log.info("Start insert");
 
@@ -41,8 +41,8 @@ public class BoardRepositoryTests {
             Board board = Board.builder()
                     .category(category)
                     .member(member)
-                    .title("게시판 제목" + i)
-                    .content("내용드릉ㄴ믕ㄴㅁ" + i)
+                    .title("문의좀 넣는다" + i)
+                    .content("농부가 문의넣는 게시글" + i)
                     .build();
 
             boardRepository.save(board);
@@ -73,32 +73,6 @@ public class BoardRepositoryTests {
         }
     }
 
-    // @Test
-    // @Transactional // lazy loading이라서 걸어줘야 함
-    // public void readest() {
-
-
-    //    IBoardListDTO result = boardRepository.getBoard(5L);
-    //     log.info(result);
-
-    //     log.info(result.getBno());
-    //     log.info(result.getEmail());
-    //     log.info(result.getCatename());
-    //     log.info(result.getNickname());
-
-
-    
-
-    // @Test
-    // public void readTest() {
-
-    //     Optional<Board> result = boardRepository.findById(10L);
-
-    //     Board board = result.orElseThrow();
-
-    //     log.info(board);
-
-    // }
 
 
     
@@ -115,16 +89,7 @@ public class BoardRepositoryTests {
 
     
 }
-    // @Test
-    // public void searchTest(){
 
-    //     PageRequestDTO pageRequestDTO = new PageRequestDTO(1, 10, "c", "1", 1);
-
-    //     PageResponseDTO<BoardListDTO> responseDTO = boardRepository.search(pageRequestDTO);
-
-    //     log.info(responseDTO);
-
-    // }
 
 
 

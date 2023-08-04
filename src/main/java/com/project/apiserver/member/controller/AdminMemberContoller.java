@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.apiserver.member.dto.MemberDTO;
-import com.project.apiserver.member.entity.MemberRole;
+import com.project.apiserver.member.dto.MemberAccountDTO;
 import com.project.apiserver.member.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -23,24 +22,24 @@ public class AdminMemberContoller {
 
 
     @GetMapping("farmer")
-    public List<MemberDTO> getFarmerList(){
+    public List<MemberAccountDTO> getFarmerList(){
 
-        MemberRole role= MemberRole.FARMER;
+        // MemberAccountRole role= MemberAccountRole.FARMER;
 
-        return memberService.getList(role);
+        // return memberService.getList(role);
+        return null;
     }
 
     @GetMapping("consumer")
-    public List<MemberDTO> getConsumerList(){
+    public List<MemberAccountDTO> getConsumerList(){
 
-         MemberRole role= MemberRole.CONSUMER;
-
-         return memberService.getList(role);
+        //return memberService.getList(role);
+        return null;
     }
 
 
     @GetMapping("memberOne")
-    public MemberDTO getFarmerOne(Long mno){
+    public MemberAccountDTO getFarmerOne(Long mno){
 
          return memberService.getOne(mno);
     }    
