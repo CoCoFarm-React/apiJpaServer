@@ -75,11 +75,9 @@ public class MemberRepositoryTests {
     }
 
     @Test
-    @Transactional
     public void getOne(){
-        
-        Optional<MemberAccount> result = repository.findById(5L);
-        MemberAccount one =  result.orElseThrow();
+      
+        MemberAccount one =  repository.getOne(6L);
 
         log.info(one);
        
@@ -122,5 +120,8 @@ public class MemberRepositoryTests {
 
         log.info(account);
     }
+
+
+
     
 }

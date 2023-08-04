@@ -1,6 +1,9 @@
 package com.project.apiserver.repository;
 
 import com.project.apiserver.member.entity.MemberAccount;
+
+import jakarta.transaction.Transactional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,7 +35,7 @@ public class BoardRepositoryTests {
         .catename("관리자문의")
         .build();
 
-        MemberAccount member = MemberAccount.builder().mno(2L).build();
+        MemberAccount member = MemberAccount.builder().mno(3L).build();
         
         log.info("Start insert");
 
@@ -60,7 +63,7 @@ public class BoardRepositoryTests {
         .cateno(5)
         .catename("공지사항")
         .build();
-        MemberAccount member = MemberAccount.builder().email("aaa99@email.com").build();
+        MemberAccount member = MemberAccount.builder().mno(11L).build();
         for(int i = 0; i<9; i++){
         Board board =Board.builder()
         .category(category)
@@ -84,6 +87,15 @@ public class BoardRepositoryTests {
         PageResponseDTO<BoardListDTO> responseDTO = boardRepository.search(pageRequestDTO);
 
         log.info(responseDTO);
+
+    }
+
+
+    @Test
+    @Transactional
+    public void getBoardOne(){
+
+        log.info(boardRepository.getBoardInfo(100L));
 
     }
 

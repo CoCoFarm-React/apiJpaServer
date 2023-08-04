@@ -21,25 +21,25 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository repository;
     private final ModelMapper modelMapper;
-
+    // Read table one row
     @Override
     public MemberAccountDTO getOne(Long mno) {
 
-        Optional<MemberAccount> optionalMember = repository.findById(mno);
+        Optional<MemberAccount> result = repository.findById(mno);
 
-        MemberAccount memberember = optionalMember.orElseThrow();
+        MemberAccount member = result.orElseThrow();
         log.info("-==========================");
-        log.info(memberember);
+        log.info(member);
         log.info("-==========================");
         // Member(mno=50, email=aaa49@email.com, pw=1111, nickname=nickname49, intro=차은우 짱50)
-        MemberAccountDTO dto = modelMapper.map(memberember, MemberAccountDTO.class);
+        MemberAccountDTO dto = modelMapper.map(member, MemberAccountDTO.class);
 
         return dto;
 
     }
 
 
-
+    // read table list with search and pagination
     @Override
     public MemberPageResponseDTO<MemberAccountDTO> getMemberList(MemberPageRequestDTO memberPageRequestDTO) {
 
@@ -54,12 +54,47 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void deleteMember(Long mno) {
 
+        Optional<MemberAccount> result = repository.findById(mno);
+
+        MemberAccount member =  result.orElseThrow();
+        
+        member.delete();
+
+        repository.save(member);
+        
     }
 
 
 
     @Override
     public void modifyMember(MemberAccountDTO memberAccountDTO) {
+
+        log.info("mno------------------------------");
+        log.info(memberAccountDTO);
+
+        Optional<MemberAccount> result =repository.findById(memberAccountDTO.getMno());
+
+        log.info("modify service1.......................");
+
+        MemberAccount member =  result.orElseThrow();
+
+        log.info("modify service.2......................");
+
+        member.changeNickname(memberAccountDTO.getNickname());
+        member.changePw(memberAccountDTO.getPw());
+        member.changeIntro(memberAccountDTO.getIntro());
+
+        repository.save(member);
+        
+    }
+
+
+    @Override
+    public void registerMember(MemberAccountDTO accountDTO) {
+
+        MemberAccount member = modelMapper.map(accountDTO, MemberAccount.class);
+
+        repository.save(member);
 
     }
 

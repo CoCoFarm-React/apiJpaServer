@@ -24,7 +24,7 @@ public interface BoardRepository extends JpaRepository<Board, Long>, BoardSearch
     //         "WHERE b.bno = :bno " )            
     // IBoardListDTO getBoard(@Param("bno") Long bno);
 
-    @Query("select new com.project.apiserver.board.dto.BoardReadDTO(b.bno, b.title, b.content, m.email, m.nickname, c.catename, b.category.cateno, b.regDate, b.modDate, b.delFlag) from Board b left join b.member m left join b.category c where b.bno = :bno")
+    @Query("select new com.project.apiserver.board.dto.BoardReadDTO(b.bno, b.title, b.content, m.email, m.nickname, c.catename, b.category.cateno, b.regDate, b.modDate, b.delFlag) from Board b left join b.member m left join b.category c where b.bno = :bno and b.delFlag=false")
     BoardReadDTO getBoardInfo(@Param("bno") Long bno);
     
 

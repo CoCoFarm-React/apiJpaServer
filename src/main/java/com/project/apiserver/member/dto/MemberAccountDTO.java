@@ -10,11 +10,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
+@Data
 public class MemberAccountDTO {
 
     private Long mno;
