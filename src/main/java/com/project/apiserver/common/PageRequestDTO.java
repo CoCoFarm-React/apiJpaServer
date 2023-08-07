@@ -7,7 +7,6 @@ import lombok.ToString;
 
 @Data
 @ToString
-
 public class PageRequestDTO {
 
     // 가장 기본적이므로 Default 값필요

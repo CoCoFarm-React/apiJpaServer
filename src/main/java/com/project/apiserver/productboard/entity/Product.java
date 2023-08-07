@@ -3,6 +3,7 @@ package com.project.apiserver.productboard.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.project.apiserver.common.ProductCategory;
 import com.project.apiserver.member.entity.MemberAccount;
 
 import jakarta.persistence.ElementCollection;
@@ -38,6 +39,9 @@ public class Product {
 
     @ManyToOne(fetch =  FetchType.LAZY)
     private MemberAccount member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ProductCategory category;
 
     private int price;
     // column이 되니 조심하게 만들어야 된다.
