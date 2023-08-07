@@ -67,6 +67,8 @@ public class BoardController {
     public Map<String, String> registBoard(BoardReadDTO boardReadDTO) {
 
         boardService.registBoard(boardReadDTO);
+        
+
         return Map.of("result", "success");
     }
 
