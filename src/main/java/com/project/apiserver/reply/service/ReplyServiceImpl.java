@@ -84,6 +84,7 @@ public class ReplyServiceImpl extends Exception implements ReplyService{
         }
         else{
             replyDTO.setOrd(Boolean.FALSE);
+            replyDTO.setGno(0L);
         }
 
         Reply reply = modelMapper.map(replyDTO, Reply.class);
