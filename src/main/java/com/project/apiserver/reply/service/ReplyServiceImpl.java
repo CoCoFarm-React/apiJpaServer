@@ -79,12 +79,13 @@ public class ReplyServiceImpl extends Exception implements ReplyService{
 
 
 
-        if(replyDTO.getGno()!=null && replyDTO.getGno() == replyDTO.getRno()){
+        if(replyDTO.getGno()!=null){
             replyDTO.setOrd(Boolean.TRUE);
+            replyDTO.setGno(replyDTO.getGno());
         }
         else{
             replyDTO.setOrd(Boolean.FALSE);
-            replyDTO.setGno(0L);
+            replyDTO.setGno(replyDTO.getRno());
         }
 
         Reply reply = modelMapper.map(replyDTO, Reply.class);

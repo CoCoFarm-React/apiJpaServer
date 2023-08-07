@@ -20,6 +20,7 @@ public class BoardListDTO {
     private Long bno;
     private String title;
     private String email;
+    private String content;
     private String nickname;
     private String catename;
     private Integer cateno;
