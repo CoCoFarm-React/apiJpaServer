@@ -38,10 +38,19 @@ public class ReplyController {
 
     }
 
+    @GetMapping("{rno}")
+    public ReplyDTO getOneReply(@PathVariable("rno") Long rno){
+
+        return replyService.readOneReply(rno);
+    }
+
+
+    
     @PostMapping("")
     public Map<String, String> registReply(@RequestBody ReplyDTO replyDTO) {
-
+ 
         log.info("--------------111-------------");
+        log.info("--------------replyDTO-------------" + replyDTO);
 
         replyService.registReply(replyDTO);
 

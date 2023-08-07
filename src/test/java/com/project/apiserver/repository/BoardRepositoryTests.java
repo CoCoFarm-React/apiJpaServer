@@ -90,6 +90,15 @@ public class BoardRepositoryTests {
 
     }
 
+    @Test
+    public void searchWriterTest(){
+
+        PageRequestDTO pageRequestDTO = new PageRequestDTO(1, 10,null,null,2);
+
+        PageResponseDTO<BoardListDTO> responseDTO = boardRepository.searchSameWriter(515L, pageRequestDTO);
+        log.info(responseDTO);
+    }
+
 
     @Test
     @Transactional
@@ -97,6 +106,22 @@ public class BoardRepositoryTests {
 
         log.info(boardRepository.getBoardInfo(100L));
 
+    }
+
+    @Test
+    public void addDummy(){
+        Category category = Category.builder().cateno(3).build();
+        MemberAccount memberAccount = MemberAccount.builder().mno(512L).build(); 
+        for(int i = 0; i < 100; i++){
+            Board board = Board.builder()
+            .category(category)
+            .member(memberAccount)
+            .title("농부의 재배일지" +i)
+            .content("재배일지 스타트 ~~~~" +i)
+            .build();
+
+            boardRepository.save(board);
+        }
     }
 
     

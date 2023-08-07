@@ -27,39 +27,38 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
     }
 
     @Override
-    public PageResponseDTO<BoardListDTO> search(PageRequestDTO requestDTO) {
+    public PageResponseDTO<BoardListDTO> search(PageRequestDTO pageRequestDTO) {
 
-        Pageable pageable = makePageable(requestDTO);
-        
+        Pageable pageable = makePageable(pageRequestDTO);
+
         QBoard qBoard = QBoard.board;
         QMemberAccount qMember = QMemberAccount.memberAccount;
         QCategory qCategory = QCategory.category;
         QReply qReply = QReply.reply1;
 
-        String keyword = requestDTO.getKeyword();
-        String searchType = requestDTO.getType();
-        Integer cateno1 = requestDTO.getCateno();
+        String keyword = pageRequestDTO.getKeyword();
+        String searchType = pageRequestDTO.getType();
+        Integer cateno1 = pageRequestDTO.getCateno();
         log.info(cateno1);
 
         JPQLQuery<Board> searchQuery = from(qBoard);
-        
+
         log.info("--------------------------------------1");
 
         searchQuery.leftJoin(qBoard.category, qCategory);
         searchQuery.leftJoin(qBoard.member, qMember);
         searchQuery.leftJoin(qReply).on(qReply.board.eq(qBoard));
 
-
         log.info("--------------------------------------2");
-        
+
         searchQuery.where(qBoard.category.cateno.eq(cateno1));
-        
+
         log.info("-------------------------------------3");
         if (keyword != null && searchType != null) {
             // tc => [t,c]
             String[] searchArr = searchType.split("");
             // BooleanBuilder 생성
-            BooleanBuilder searchBuilder = new BooleanBuilder();         
+            BooleanBuilder searchBuilder = new BooleanBuilder();
             for (String typeword : searchArr) {
 
                 switch (typeword) {
@@ -72,11 +71,9 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
               // for문 끝난후 where 로 searchBuilder 추가
             searchQuery.where(searchBuilder);
         }
-        
+
         log.info("--------------------------------------");
         this.getQuerydsl().applyPagination(pageable, searchQuery);
-
-
 
         searchQuery.groupBy(qBoard);
         JPQLQuery<BoardListDTO> listQuery = searchQuery.select(Projections.bean(
@@ -88,18 +85,82 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
                 qBoard.category.catename,
                 qBoard.category.cateno,
                 qBoard.regDate,
-                qReply.countDistinct().as("rcnt")
-                ));
-                        
+                qReply.countDistinct().as("rcnt")));
+
         long totalCount = listQuery.fetchCount();
         List<BoardListDTO> list = listQuery.fetch();
         log.info(list);
 
-        return new PageResponseDTO<>(list, totalCount, requestDTO);
+        return new PageResponseDTO<>(list, totalCount, pageRequestDTO);
 
     }
 
+    @Override
+    public PageResponseDTO<BoardListDTO> searchSameWriter(Long mno, PageRequestDTO pageRequestDTO) {
+        Pageable pageable = makePageable(pageRequestDTO);
 
-    
+        QBoard qBoard = QBoard.board;
+        QMemberAccount qMember = QMemberAccount.memberAccount;
+        QCategory qCategory = QCategory.category;
+        QReply qReply = QReply.reply1;
+
+        String keyword = pageRequestDTO.getKeyword();
+        String searchType = pageRequestDTO.getType();
+        Integer cateno1 = pageRequestDTO.getCateno();
+        log.info(cateno1);
+        
+        JPQLQuery<Board> searchQuery = from(qBoard);
+
+        log.info("--------------------------------------1");
+
+        searchQuery.leftJoin(qBoard.category, qCategory);
+        searchQuery.leftJoin(qBoard.member, qMember);
+        searchQuery.leftJoin(qReply).on(qReply.board.eq(qBoard));
+
+        log.info("--------------------------------------2");
+
+        searchQuery.where(qBoard.category.cateno.eq(cateno1));
+        searchQuery.where(qBoard.member.mno.eq(mno));
+
+        log.info("-------------------------------------3");
+        if (keyword != null && searchType != null) {
+            // tc => [t,c]
+            String[] searchArr = searchType.split("");
+            // BooleanBuilder 생성
+            BooleanBuilder searchBuilder = new BooleanBuilder();
+            for (String typeword : searchArr) {
+
+                switch (typeword) {
+                    case "t" -> searchBuilder.or(qBoard.title.contains(keyword));
+                    case "c" -> searchBuilder.or(qBoard.content.contains(keyword));
+                }
+
+            } // end for
+              // for문 끝난후 where 로 searchBuilder 추가
+            searchQuery.where(searchBuilder);
+        }
+
+        log.info("--------------------------------------");
+        this.getQuerydsl().applyPagination(pageable, searchQuery);
+
+        searchQuery.groupBy(qBoard);
+        JPQLQuery<BoardListDTO> listQuery = searchQuery.select(Projections.bean(
+                BoardListDTO.class,
+                qBoard.bno,
+                qBoard.title,
+                qMember.email,
+                qMember.nickname,
+                qBoard.category.catename,
+                qBoard.category.cateno,
+                qBoard.regDate,
+                qReply.countDistinct().as("rcnt")));
+
+        long totalCount = listQuery.fetchCount();
+        List<BoardListDTO> list = listQuery.fetch();
+        log.info(list);
+
+        return new PageResponseDTO<>(list, totalCount, pageRequestDTO);
+
+    }
 
 }

@@ -79,6 +79,12 @@ public class BoardServiceImpl implements BoardService {
         
     }
 
+    @Override
+    public PageResponseDTO<BoardListDTO> getListSameWriter(Long mno, PageRequestDTO pageRequestDTO) {
+        
+        return boardRepository.searchSameWriter(mno, pageRequestDTO);
+    }
+
     
 
 }

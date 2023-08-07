@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.project.apiserver.common.PageResponseDTO;
+import com.project.apiserver.member.entity.MemberAccount;
 import com.project.apiserver.reply.dto.ReplyDTO;
 import com.project.apiserver.reply.dto.ReplyPageRequestDTO;
 import com.project.apiserver.reply.entity.Reply;
@@ -32,7 +33,7 @@ public class ReplyServiceImpl extends Exception implements ReplyService{
     public PageResponseDTO<ReplyDTO> getReplyList(ReplyPageRequestDTO requestDTO) {
 
         boolean last = requestDTO.isLast();
-        int pageNum = requestDTO.getPage();
+        int pageNum = requestDTO.getPage(); 
 
         if (last) {
             long totalCount = replyRepository.getCountReply(requestDTO.getBno());
@@ -41,10 +42,20 @@ public class ReplyServiceImpl extends Exception implements ReplyService{
             pageNum = pageNum <= 0 ? 1 : pageNum;
         }
 
+        log.info("==================1111=================");
+
+
+
         Pageable pageable = PageRequest.of(pageNum - 1, requestDTO.getSize(), Sort.by("rno").ascending());
+
+        log.info("==================2222=================");
+        log.info(requestDTO.getBno());
+
 
         Page<ReplyDTO> result = replyRepository.getReplyList(requestDTO.getBno(), pageable);
         log.info(result.toString());
+
+        log.info("==================3333=================");
 
         long totalReplyCount = result.getTotalElements();
 
@@ -54,6 +65,9 @@ public class ReplyServiceImpl extends Exception implements ReplyService{
         PageResponseDTO<ReplyDTO> responseDTO = new PageResponseDTO<>(dtoList, totalReplyCount, requestDTO);
         responseDTO.setPage(pageNum);
 
+
+        
+
         return responseDTO;
 
     }
@@ -61,10 +75,23 @@ public class ReplyServiceImpl extends Exception implements ReplyService{
     @Override
     public void registReply(ReplyDTO replyDTO) {
 
+        log.info("==========33333==============");
+
+
+
+        if(replyDTO.getGno()!=null && replyDTO.getGno() == replyDTO.getRno()){
+            replyDTO.setOrd(Boolean.TRUE);
+        }
+        else{
+            replyDTO.setOrd(Boolean.FALSE);
+        }
+
         Reply reply = modelMapper.map(replyDTO, Reply.class);
 
-        log.info(reply);
+        MemberAccount memberAccount = MemberAccount.builder().mno(replyDTO.getMno()).build();
 
+        reply.setMember(memberAccount);
+        
         replyRepository.save(reply);
 
     }
@@ -104,6 +131,12 @@ public class ReplyServiceImpl extends Exception implements ReplyService{
         
         replyRepository.save(reply);
 
+    }
+
+    @Override
+    public ReplyDTO readOneReply(Long rno) {
+        log.info("----------------------------------");
+        return replyRepository.getOneReply(rno);
     }
 
 }

@@ -22,6 +22,7 @@ public interface BoardService {
    //수정
    void modifyBoard(BoardReadDTO boardReadDTO);
 
+   PageResponseDTO<BoardListDTO> getListSameWriter(Long mno,PageRequestDTO pageRequestDTO);
    
 
 }

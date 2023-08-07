@@ -43,12 +43,24 @@ public class BoardController {
     @GetMapping("list")
     public PageResponseDTO<BoardListDTO> getList(
             // queryString 값으로 받아옴
-            @ParameterObject PageRequestDTO requestDTO) {
+            @ParameterObject PageRequestDTO pageRequestDTO) {
 
-        requestDTO.setCategory(
-                requestDTO.getCateno() == null || requestDTO.getCateno() <= 0 ? 5 : requestDTO.getCateno());
-        return boardService.getList(requestDTO);
+        pageRequestDTO.setCategory(
+               pageRequestDTO.getCateno() == null || pageRequestDTO.getCateno() <= 0 ? 5 : pageRequestDTO.getCateno());
+        return boardService.getList(pageRequestDTO);
     }
+
+    @GetMapping("list/{mno}")
+    public PageResponseDTO<BoardListDTO> getListSameWriter(
+        @PathVariable("mno") Long mno,
+        @ParameterObject PageRequestDTO pageRequestDTO
+    ){
+        pageRequestDTO.setCategory(
+            pageRequestDTO.getCateno() == null || pageRequestDTO.getCateno() <= 0 ? 5 : pageRequestDTO.getCateno());
+        
+        return boardService.getListSameWriter(mno, pageRequestDTO);
+    }
+
 
     // 게시글 등록
     @PostMapping("")

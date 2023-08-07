@@ -1,11 +1,13 @@
 package com.project.apiserver.reply.entity;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import com.project.apiserver.board.entity.Board;
 import com.project.apiserver.common.BaseEntity;
 
 
 import com.project.apiserver.member.entity.MemberAccount;
-import groovy.transform.ToString;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -17,10 +19,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Builder
-@ToString(excludes = {"member", "board"})
+@ToString(exclude = {"member", "board"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -41,6 +44,9 @@ public class Reply extends BaseEntity {
 
     private boolean delFlag;
 
+    @ColumnDefault("0")
+    private Long gno;
+
     public void changeDelFlag(boolean delFlag) {
         this.delFlag = delFlag;
     }
@@ -50,6 +56,13 @@ public class Reply extends BaseEntity {
     }
     public void changeOrd (boolean ord){
         this.ord = ord;
+    }
+
+    public void setMember(MemberAccount memberAccount) {
+        this.member = memberAccount;
+    }
+    public void setGno(Long gno){
+        this.gno = gno;
     }
 
 }

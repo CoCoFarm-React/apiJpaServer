@@ -17,4 +17,6 @@ public interface ReplyService {
 
     void modifyReply(ReplyDTO replyDTO);
 
+    ReplyDTO readOneReply(Long rno);
+
 }

@@ -18,11 +18,14 @@ import lombok.ToString;
 public class ReplyDTO {
     
     private Long rno;
+
     private String reply;
+    private Long gno;
     @Builder.Default
     private boolean ord = false;
     private boolean delFlag;
     
+    private Long mno;
     
     private String email;
     private String nickname;
