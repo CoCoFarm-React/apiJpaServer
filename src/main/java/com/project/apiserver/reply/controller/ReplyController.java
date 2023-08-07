@@ -51,8 +51,8 @@ public class ReplyController {
     public Map<String, String> registReply(@RequestBody ReplyDTO replyDTO) {
  
         log.info("--------------111-------------");
-        log.info("--------------replyDTO-------------" + replyDTO);
-
+        log.info("--------------replyDTO------------- insert test");
+        log.info(replyDTO.getGno());
         replyService.registReply(replyDTO);
 
         log.info("--------------222-------------");
