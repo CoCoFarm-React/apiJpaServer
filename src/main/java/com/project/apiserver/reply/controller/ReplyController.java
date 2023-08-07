@@ -40,7 +40,8 @@ public class ReplyController {
 
     @GetMapping("{rno}")
     public ReplyDTO getOneReply(@PathVariable("rno") Long rno){
-
+        log.info("rno=-----------------------------------");
+        log.info(rno);
         return replyService.readOneReply(rno);
     }
 
@@ -76,6 +77,7 @@ public class ReplyController {
     @PutMapping("")
     public Map<String, String> modifyReply(@RequestBody ReplyDTO replyDTO) {
 
+ 
         replyService.modifyReply(replyDTO);
 
         return Map.of("result", "success");
