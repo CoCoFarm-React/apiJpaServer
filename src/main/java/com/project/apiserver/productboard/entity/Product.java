@@ -1,8 +1,10 @@
 package com.project.apiserver.productboard.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.project.apiserver.common.BaseEntity;
 import com.project.apiserver.common.ProductCategory;
 import com.project.apiserver.member.entity.MemberAccount;
 
@@ -27,14 +29,13 @@ import lombok.ToString;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class Product extends BaseEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pno;
 
     private String pname;
-
     private String pdesc;
 
     @ManyToOne(fetch =  FetchType.LAZY)

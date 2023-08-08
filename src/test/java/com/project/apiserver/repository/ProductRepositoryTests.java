@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 
+import com.project.apiserver.common.PageRequestDTO;
 import com.project.apiserver.common.ProductCategory;
 import com.project.apiserver.member.entity.MemberAccount;
 import com.project.apiserver.productboard.entity.Product;
 import com.project.apiserver.productboard.repository.ProductRepository;
+import com.project.apiserver.productboard.repository.search.ProductSearchImpl;
 
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
@@ -23,6 +25,8 @@ public class ProductRepositoryTests {
 
     @Autowired
     private ProductRepository repository;
+
+
 
     // 등록
     @Test
@@ -59,6 +63,16 @@ public class ProductRepositoryTests {
         log.info(data + data.getCategory().getProcatename()));
 
     }
+
+    @Test
+    @Transactional
+    public void getListTestWithSearch(){
+
+        PageRequestDTO dto = new PageRequestDTO();
+
+        log.info("------------------------------------------------------");
+        log.info(repository.search(dto));
+    }   
 
     // 조회
     @Test

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 
+import com.project.apiserver.common.PageRequestDTO;
 import com.project.apiserver.productboard.dto.ProductDTO;
 import com.project.apiserver.productboard.entity.ProductImage;
 import com.project.apiserver.productboard.service.ProductService;
@@ -27,7 +28,17 @@ public class ProductServiceTests {
     @Transactional
     public void getListTest(){
 
-        productService.getList();
+        // productService.getList();
+
+    }
+
+    @Test
+    @Transactional
+    public void getListWithSearchTest(){
+
+        PageRequestDTO dto = new PageRequestDTO();
+
+        productService.getList(dto);
 
     }
 

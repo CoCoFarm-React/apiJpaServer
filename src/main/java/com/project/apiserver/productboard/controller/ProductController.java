@@ -3,6 +3,7 @@ package com.project.apiserver.productboard.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.apiserver.common.FileUploader;
+import com.project.apiserver.common.PageRequestDTO;
+import com.project.apiserver.common.PageResponseDTO;
 import com.project.apiserver.productboard.dto.ProductDTO;
+import com.project.apiserver.productboard.dto.ProductListDTO;
 import com.project.apiserver.productboard.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
@@ -29,10 +33,11 @@ public class ProductController {
     private final FileUploader fileUploader;
 
     // 목록
+    // @ParameterObject 를 이용해 쿼리스트링으로 PageRequestDTO를 받음
     @GetMapping("/list")
-    public List<ProductDTO> getList(){
+    public PageResponseDTO<ProductListDTO> getList(@ParameterObject PageRequestDTO requestDTO){
 
-        return productService.getList();
+        return productService.getList(requestDTO);
 
     }
 

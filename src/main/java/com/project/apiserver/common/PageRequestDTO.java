@@ -2,6 +2,7 @@ package com.project.apiserver.common;
 
 
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 
@@ -15,9 +16,8 @@ public class PageRequestDTO {
     private int size = 10;
 
     private String type, keyword;
-
     
-    private Integer cateno;
+    private Integer cateno, procateno;
 
     public PageRequestDTO() {
         this(1,10);
@@ -48,6 +48,10 @@ public class PageRequestDTO {
     public void setCategory(Integer cateno){
        
         this.cateno = cateno;
+    }
+    public void setProcateno(Integer cateno){
+    
+        this.procateno = cateno;
     }
 
 }

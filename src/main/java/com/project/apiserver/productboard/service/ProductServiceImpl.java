@@ -10,10 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.project.apiserver.common.Category;
 import com.project.apiserver.common.FileUploader;
+import com.project.apiserver.common.PageRequestDTO;
+import com.project.apiserver.common.PageResponseDTO;
 import com.project.apiserver.common.ProductCategory;
 import com.project.apiserver.member.dto.MemberAccountDTO;
 import com.project.apiserver.member.entity.MemberAccount;
 import com.project.apiserver.productboard.dto.ProductDTO;
+import com.project.apiserver.productboard.dto.ProductListDTO;
 import com.project.apiserver.productboard.entity.Product;
 import com.project.apiserver.productboard.repository.ProductRepository;
 
@@ -31,15 +34,17 @@ public class ProductServiceImpl implements ProductService {
 
     // 목록
     @Override
-    public List<ProductDTO> getList() {
+    public PageResponseDTO<ProductListDTO> getList(PageRequestDTO requestDTO) {
 
-        List<Product> result = repository.findAll();
-        log.info("result------------------------ " + result);
+        // List<Product> result = repository.findAll();
+        // log.info("result------------------------ " + result);
 
-        List<ProductDTO> dtoList = result.stream().map(e -> modelMapper.map(e, ProductDTO.class)).collect(Collectors.toList());
-        log.info("dtoList------------------------ " + dtoList);
+        PageResponseDTO<ProductListDTO> result = repository.search(requestDTO);
+
+        // List<ProductDTO> dtoList = result.stream().map(e -> modelMapper.map(e, ProductDTO.class)).collect(Collectors.toList());
+        // log.info("dtoList------------------------ " + dtoList);
         
-        return dtoList;
+        return result;
 
     }
 
