@@ -12,4 +12,10 @@ public interface ProductService {
 
     ProductDTO readOne(Long pno);
 
+    void register(ProductDTO productDTO);
+
+    void delete(Long pno);
+
+    void modify(ProductDTO productDTO);
+
 }

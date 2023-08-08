@@ -17,9 +17,6 @@ import lombok.ToString;
 public class ProductImage {
 
     private String fname;
-
     private int ord;
-
-    
 
 }

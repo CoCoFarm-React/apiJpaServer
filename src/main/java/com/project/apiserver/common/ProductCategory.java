@@ -22,4 +22,11 @@ public class ProductCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer procateno; 
     private String procatename;
+
+    public void changeCateno(Integer cateno){
+
+        this.procateno = cateno;
+
+    }
+
 }

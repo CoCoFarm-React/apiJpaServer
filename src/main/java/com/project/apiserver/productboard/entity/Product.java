@@ -48,6 +48,7 @@ public class Product {
     // delFlag
     private boolean delFlag;
 
+    // ElementCollection은 종속적인 요소까지 함께 삭제 됨 (cascade 불필요)
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default
     private List<ProductImage> images = new ArrayList<>();
@@ -82,6 +83,8 @@ public class Product {
         this.delFlag = delFlag;
     }
 
-
+    public void changeProductCategory(ProductCategory category) {
+        this.category = category;
+    }
 
 }
