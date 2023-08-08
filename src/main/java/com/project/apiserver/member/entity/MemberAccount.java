@@ -3,6 +3,7 @@ package com.project.apiserver.member.entity;
 import com.project.apiserver.common.BaseEntity;
 import com.project.apiserver.member.dto.MemberAccountRole;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +30,7 @@ public class MemberAccount extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long mno;
 
+    @Column(unique=true)
     private String email;
 
     private String pw;
@@ -39,6 +41,8 @@ public class MemberAccount extends BaseEntity {
     private boolean delFlag;
 
     private String roleName;
+
+    private boolean social;
 
     // private String intro;
 
