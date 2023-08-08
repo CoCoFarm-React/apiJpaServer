@@ -143,7 +143,7 @@ public class MemberAccountDTO  implements UserDetails, OAuth2User {
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.delFlag;
+        return !this.delFlag;
     }
 
 
