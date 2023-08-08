@@ -94,6 +94,9 @@ public class ProductServiceImpl implements ProductService {
         
         repository.save(product);
 
+        List<String> fileNames = product.getImages().stream().map(pi -> pi.getFname()).collect(Collectors.toList());
+        fileUploader.removeFiles(fileNames);
+
     }
 
     @Override

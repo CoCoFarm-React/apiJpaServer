@@ -3,6 +3,7 @@ package com.project.apiserver.productboard.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.mail.Multipart;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,6 @@ public class ProductDTO {
 
     // 등록, 수정 업로드 된 파일 데이터를 수집하는 용도
     @Builder.Default
-    private List<Multipart> files = new ArrayList<>();
+    private List<MultipartFile> files = new ArrayList<>();
 
 }
