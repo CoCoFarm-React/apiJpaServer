@@ -1,11 +1,13 @@
 package com.project.apiserver.security;
 
-import java.util.stream.Collectors;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import com.project.apiserver.member.dto.MemberAccountDTO;
+import com.project.apiserver.member.entity.MemberAccount;
 import com.project.apiserver.member.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -27,25 +29,29 @@ public class CustomUserDetailsService implements UserDetailsService {
         log.info("-----------------------------loadUserByUsername--------------------------------");
         log.info("-----------------------------loadUserByUsername--------------------------------");
         
-        // Member member = memberRepository.getWithRoles(username);
+        MemberAccount memberAccount = memberRepository.getInfoEmail(username);
 
-        // if (member == null) {
-        //     throw new UsernameNotFoundException("Not Found");
-        // }
+        if (memberAccount == null) {
+            throw new UsernameNotFoundException("Not Found");
+        }
 
-        // MemberDTO memberDTO = new MemberDTO(
-        //         member.getEmail(),
-        //         member.getPw(),
-        //         member.getNickname(),
-        //         member.isSocial(),
-        //         member.getMemberRoleList()
-        //                 .stream()
-        //                 .map(memberRole -> memberRole.name()).collect(Collectors.toList()));
+        MemberAccountDTO memberDTO = MemberAccountDTO
+        .builder()
+        .mno(memberAccount.getMno())
+        .email(memberAccount.getEmail())
+        .pw(memberAccount.getPw())
+        .nickname(memberAccount.getNickname())
+        .roleName(memberAccount.getRoleName())
+        .intro(memberAccount.getIntro())
+        .social(memberAccount.isSocial())
+        .delFlag(memberAccount.isDelFlag())
+        .build();
+     
+            
+         log.info(memberDTO);
 
-        // log.info(memberDTO);
-
-        // return memberDTO;
-        return null;
+        return memberDTO;
+      
 
     }
 

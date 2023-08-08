@@ -52,13 +52,14 @@ public class CustomSecurityConfig {
         http.exceptionHandling(config -> {
             config.accessDeniedHandler(new CustomAccessDeniedHandler());
         });
-        http.oauth2Client(config->{
+        
+        // http.oauth2Client(config->{
 
-        });
+        // });
 
-        http.oauth2Login(config->{
-            config.successHandler(new OAuthAPILoginSuccessHandler());
-        });
+        // http.oauth2Login(config->{
+        //     config.successHandler(new OAuthAPILoginSuccessHandler());
+        // });
 
         // 세션/쿠키 사용 안함 api 서버에서 가장중요함
         http.sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

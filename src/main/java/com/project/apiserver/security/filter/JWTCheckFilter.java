@@ -2,12 +2,14 @@ package com.project.apiserver.security.filter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+
 import java.util.Map;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.project.apiserver.member.dto.MemberAccountDTO;
 import com.project.apiserver.util.JWTUtil;
 
 import com.google.gson.Gson;
@@ -26,28 +28,31 @@ public class JWTCheckFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
 
         // Preflight 일때 제외시켜줘야된다.
-        if (request.getMethod().equals("OPTIONS")) {
+        if(request.getMethod().equals("OPTIONS")) {
             return true;
         }
 
-        // /api/todo/list /api/member/login
+
         String path = request.getRequestURI();
         if(path.startsWith("/")){
             return true;
         }
 
-        // if (path.equals("/api/member/")) {
+        // if(path.equals("/api/member/login")) {
         //     return true;
         // }
-        // if(path.startsWith("/login")){
+        // if(path.startsWith("/api/admin/")){
         //     return true;
         // }
-        // if(path.startsWith("/oauth2")){
+        // //나중에 걸어야됨 삭제요망
+        // if(path.startsWith("/api/board/")){
         //     return true;
         // }
-        // if(path.endsWith(".ico")){
+        // //나중에 걸어야됨 삭제요망
+        // if(path.startsWith("/api/replies/")){
         //     return true;
         // }
+
 
         return false;
 
@@ -76,22 +81,36 @@ public class JWTCheckFilter extends OncePerRequestFilter {
 
             filterChain.doFilter(request, response);
             // clamis 안에 들어있는 정보들을 추출하는 과정
+            Long mno = (Long) claims.get("mno");
             String email = (String) claims.get("email");
             String pw = (String) claims.get("pw");
             String nickname = (String) claims.get("nickname");
+            String roleName = (String) claims.get("roleName");
+            String intro = (String) claims.get("intro");
             Boolean social = (Boolean) claims.get("social");
-            List<String> roleNames = (List<String>) claims.get("roleNames");
-            // memberDTO라는 사용자 생성
-            // MemberDTO memberDTO = new MemberDTO(email, pw, nickname, social.booleanValue(), roleNames);
+            Boolean delFlag = (Boolean) claims.get("delFlag");
 
-            // log.info("-----------------------------------");
-            // log.info(memberDTO);
-            // log.info(memberDTO.getAuthorities());
-            // // 만든 meberDTO를 security안에 포함시키는 과정 
-            // UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(memberDTO,
-            //         pw, memberDTO.getAuthorities());
 
-            // SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            // MemberAccountDTO 사용자 생성
+            MemberAccountDTO memberAccountDTO = MemberAccountDTO
+            .builder()
+            .mno(mno)
+            .email(email)
+            .pw(pw)
+            .nickname(nickname)
+            .roleName(roleName)
+            .intro(intro)
+            .social(social)
+            .delFlag(delFlag)
+            .build();
+            log.info("-----------------------------------");
+            log.info(memberAccountDTO);
+            log.info(memberAccountDTO.getAuthorities());
+            // 만든 meberDTO를 security안에 포함시키는 과정 
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(memberAccountDTO,
+                    pw, memberAccountDTO.getAuthorities());
+
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
         } catch (Exception e) {
 

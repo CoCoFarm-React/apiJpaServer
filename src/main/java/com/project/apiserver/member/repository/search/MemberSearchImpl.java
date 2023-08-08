@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPQLQuery;
 
@@ -73,11 +74,15 @@ public class MemberSearchImpl extends QuerydslRepositorySupport implements Membe
             account.roleName
         
         ));
-        List<MemberAccountDTO> listquery = queryDto.fetch();
-        long totalCount = queryDto.fetchCount();
-        log.info(listquery);
-        
-        return new MemberPageResponseDTO<>(listquery, totalCount, requestDTO);
+
+        List<MemberAccountDTO> accountDTOs = queryDto.fetch();
+
+        long total = queryDto.fetchCount();
+
+        //JPQLQuery<Tuple> tupleQuery = searchQuery.select(account.mno,account.email,account.pw,account.nickname,account.)
+
+        return new MemberPageResponseDTO<>(accountDTOs, total, requestDTO);
+     
 
 
     }
