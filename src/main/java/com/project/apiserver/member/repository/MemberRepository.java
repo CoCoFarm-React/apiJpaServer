@@ -15,6 +15,4 @@ public interface MemberRepository extends JpaRepository<MemberAccount, Long>, Me
     @Query("select m from MemberAccount m where m.email = :email")
     MemberAccount getInfoEmail(@Param("email") String email);
     
-
-
 }

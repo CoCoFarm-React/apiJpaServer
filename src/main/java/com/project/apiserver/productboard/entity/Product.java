@@ -1,9 +1,11 @@
 package com.project.apiserver.productboard.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.project.apiserver.common.Category;
+import com.project.apiserver.common.BaseEntity;
+import com.project.apiserver.common.ProductCategory;
 import com.project.apiserver.member.entity.MemberAccount;
 
 import jakarta.persistence.ElementCollection;
@@ -27,26 +29,24 @@ import lombok.ToString;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class Product extends BaseEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pno;
 
     private String pname;
-
     private String pdesc;
 
     @ManyToOne(fetch =  FetchType.LAZY)
     private MemberAccount member;
-    
-    @ManyToOne(fetch =  FetchType.LAZY)
-    private Category category;
+
     private int price;
     // column이 되니 조심하게 만들어야 된다.
     // delFlag
     private boolean delFlag;
 
+    // ElementCollection은 종속적인 요소까지 함께 삭제 됨 (cascade 불필요)
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default
     private List<ProductImage> images = new ArrayList<>();
@@ -81,6 +81,8 @@ public class Product {
         this.delFlag = delFlag;
     }
 
-
+    public void changeProductCategory(ProductCategory category) {
+        this.category = category;
+    }
 
 }

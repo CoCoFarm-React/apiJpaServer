@@ -2,12 +2,12 @@ package com.project.apiserver.common;
 
 
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 
 @Data
 @ToString
-
 public class PageRequestDTO {
 
     // 가장 기본적이므로 Default 값필요
@@ -16,9 +16,8 @@ public class PageRequestDTO {
     private int size = 10;
 
     private String type, keyword;
-
     
-    private Integer cateno;
+    private Integer cateno, procateno;
 
     public PageRequestDTO() {
         this(1,10);
@@ -49,6 +48,10 @@ public class PageRequestDTO {
     public void setCategory(Integer cateno){
        
         this.cateno = cateno;
+    }
+    public void setProcateno(Integer cateno){
+    
+        this.procateno = cateno;
     }
 
 }

@@ -5,11 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+
 import com.project.apiserver.productboard.entity.Product;
+import com.project.apiserver.productboard.repository.search.ProductSearch;
 
 
 
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long>, ProductSearch {
     
     // 상세보기용을 위한 JPQL 작업
     @EntityGraph(attributePaths = "images")
