@@ -3,6 +3,7 @@ package com.project.apiserver.repository;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,11 +87,7 @@ public class ProductRepositoryTests {
     @Transactional
     public void readTest(){
         
-        List<ProductReadDTO> list = repository.selectOne(2L);
-
-        list.forEach(data -> log.info(data));
-
-        // log.info(repository.selectOne(2L));
+        
 
     }
 
