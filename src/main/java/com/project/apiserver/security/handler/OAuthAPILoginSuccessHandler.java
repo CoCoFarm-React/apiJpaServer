@@ -1,11 +1,12 @@
 package com.project.apiserver.security.handler;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.util.HashMap;
 import java.util.Map;
  
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import com.project.apiserver.member.dto.MemberAccountDTO;
 import com.project.apiserver.util.JWTUtil;
  
 import com.google.gson.Gson;
@@ -30,26 +31,26 @@ public class OAuthAPILoginSuccessHandler implements AuthenticationSuccessHandler
  
     log.info("SEND TO APPLICATION: " + email);
  
-    // MemberDTO memberDTO = (MemberDTO) authentication.getPrincipal();
+    MemberAccountDTO memberAccountDTO = (MemberAccountDTO) authentication.getPrincipal();
  
-    // Map<String, Object> claims = memberDTO.getClaims();
+    Map<String, Object> claims = memberAccountDTO.getClaims();
  
-    // String accessToken = JWTUtil.generateToken(claims, 10);
+    String accessToken = JWTUtil.generateToken(claims, 10);
  
-    // String refreshToken = JWTUtil.generateToken(claims, 60 * 24);
+    String refreshToken = JWTUtil.generateToken(claims, 60 * 24);
  
-    // Gson gson = new Gson();
+    Gson gson = new Gson();
  
  
 
-    // claims.put("accessToken", accessToken);
-    // claims.put("refreshToken", refreshToken);
+    claims.put("accessToken", accessToken);
+    claims.put("refreshToken", refreshToken);
  
-    // String jsonStr = gson.toJson(claims);
-    // // URL에 적용가능한 무자열로 변환 redirect는 get방식만 되기떄문에
-    // String encodeStr = URLEncoder.encode(jsonStr, "UTF-8");
+    String jsonStr = gson.toJson(claims);
+    // URL에 적용가능한 무자열로 변환 redirect는 get방식만 되기떄문에
+    String encodeStr = URLEncoder.encode(jsonStr, "UTF-8");
  
-    // response.sendRedirect("http://localhost:3000/member/oauthResult?data="+encodeStr);
+     response.sendRedirect("http://localhost:3000/member/oauthResult?data="+encodeStr);
  
   }
  
