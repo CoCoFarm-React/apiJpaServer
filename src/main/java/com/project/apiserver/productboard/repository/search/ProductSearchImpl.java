@@ -56,6 +56,7 @@ public class ProductSearchImpl extends QuerydslRepositorySupport implements Prod
         // where 조건
         searchQuery.where(product.delFlag.eq(Boolean.FALSE));
         searchQuery.where(product.category.procateno.eq(procateno));
+        // searchQuery.where(product.pno.eq(product.images.product_pno));
 
         // 검색 조건이 있을 때
         if(keyword != null && type != null) {
@@ -90,8 +91,7 @@ public class ProductSearchImpl extends QuerydslRepositorySupport implements Prod
             product.member.nickname,
             product.member.roleName,
             product.category.procatename,
-            product.category.procateno,
-            image.fname
+            product.category.procateno
         ));
 
         long totalCount = listQuery.fetchCount();
