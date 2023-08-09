@@ -111,7 +111,7 @@ public class BoardRepositoryTests {
     @Test
     public void addDummy(){
         Category category = Category.builder().cateno(3).build();
-        MemberAccount memberAccount = MemberAccount.builder().mno(512L).build(); 
+        MemberAccount memberAccount = MemberAccount.builder().mno(480L).build(); 
         for(int i = 0; i < 100; i++){
             Board board = Board.builder()
             .category(category)

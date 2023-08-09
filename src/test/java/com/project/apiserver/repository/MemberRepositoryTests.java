@@ -11,6 +11,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.Commit;
 
 import jakarta.transaction.Transactional;
@@ -25,13 +26,16 @@ public class MemberRepositoryTests {
     @Autowired
     private MemberRepository repository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Test
     public void insertTest(){
 
         for(int i = 0; i<500; i++){
         MemberAccount member = MemberAccount.builder()
         .email("aaa" +i+"@email.com")
-        .pw("1111")
+        .pw(passwordEncoder.encode("1111"))
         .nickname("nickname"+ i)
         .intro("자소개" + i)
         .build();
@@ -53,8 +57,8 @@ public class MemberRepositoryTests {
     @Test
     public void insertAdmin(){
          MemberAccount member = MemberAccount.builder()
-        .email("aaa" +100+"@email.com")
-        .pw("1111")
+        .email("aaa" +501+"@email.com")
+        .pw(passwordEncoder.encode("1111"))
         .nickname("admin")
         .intro("관리자 소개")
         .roleName(MemberAccountRole.ADMIN.getRoleName())

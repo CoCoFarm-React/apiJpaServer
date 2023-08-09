@@ -43,20 +43,19 @@ public class ProductSearchImpl extends QuerydslRepositorySupport implements Prod
         String type = requestDTO.getType();
         Integer procateno = 1;
 
-        procateno = requestDTO.getProcateno();
+        procateno = requestDTO.getCateno();
 
         // JPQLQuery 생성
         JPQLQuery<Product> searchQuery = from(product);
 
         // join
+        searchQuery.leftJoin(product.category,category);
         searchQuery.leftJoin(product.member, member);
-        searchQuery.leftJoin(product.category, category);
         searchQuery.leftJoin(product.images, image);
+
 
         // where 조건
         searchQuery.where(product.delFlag.eq(Boolean.FALSE));
-        searchQuery.where(product.category.procateno.eq(procateno));
-        // searchQuery.where(product.pno.eq(product.images.product_pno));
 
         // 검색 조건이 있을 때
         if(keyword != null && type != null) {

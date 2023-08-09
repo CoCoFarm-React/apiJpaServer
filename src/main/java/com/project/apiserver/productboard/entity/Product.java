@@ -25,7 +25,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @Table(name = "tbl_product")
-@ToString(exclude = {"images","member"})
+@ToString(exclude = {"images","member","category"})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -41,9 +41,6 @@ public class Product extends BaseEntity {
     @ManyToOne(fetch =  FetchType.LAZY)
     private MemberAccount member;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private ProductCategory category;
-
     private int price;
     // column이 되니 조심하게 만들어야 된다.
     // delFlag
@@ -53,6 +50,9 @@ public class Product extends BaseEntity {
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default
     private List<ProductImage> images = new ArrayList<>();
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ProductCategory category;
 
     // 상품을 추가하는 method
     public void addImage(String name) {
