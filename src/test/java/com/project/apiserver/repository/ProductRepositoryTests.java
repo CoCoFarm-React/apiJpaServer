@@ -12,6 +12,8 @@ import org.springframework.test.annotation.Commit;
 import com.project.apiserver.common.PageRequestDTO;
 import com.project.apiserver.common.ProductCategory;
 import com.project.apiserver.member.entity.MemberAccount;
+import com.project.apiserver.productboard.dto.ProductListDTO;
+import com.project.apiserver.productboard.dto.ProductReadDTO;
 import com.project.apiserver.productboard.entity.Product;
 import com.project.apiserver.productboard.repository.ProductRepository;
 import com.project.apiserver.productboard.repository.search.ProductSearchImpl;
@@ -84,7 +86,11 @@ public class ProductRepositoryTests {
     @Transactional
     public void readTest(){
         
-        log.info(repository.selectOne(2L));
+        List<ProductReadDTO> list = repository.selectOne(2L);
+
+        list.forEach(data -> log.info(data));
+
+        // log.info(repository.selectOne(2L));
 
     }
 

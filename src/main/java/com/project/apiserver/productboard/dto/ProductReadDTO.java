@@ -1,6 +1,10 @@
 package com.project.apiserver.productboard.dto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -33,5 +37,14 @@ public class ProductReadDTO {
 
     private Integer procateno;
     private String procatename;
+
+    private String fname; // pi.fname에 해당하는 필드 추가
+
+    // @Builder.Default
+    // private List<String> images = new ArrayList<>();
+
+    // // 등록, 수정 업로드 된 파일 데이터를 수집하는 용도
+    // @Builder.Default
+    // private List<MultipartFile> files = new ArrayList<>();
     
 }
