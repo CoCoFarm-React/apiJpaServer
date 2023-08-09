@@ -1,5 +1,6 @@
 package com.project.apiserver.productboard.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -16,7 +17,9 @@ import com.project.apiserver.common.ProductCategory;
 import com.project.apiserver.member.dto.MemberAccountDTO;
 import com.project.apiserver.member.entity.MemberAccount;
 import com.project.apiserver.productboard.dto.ProductDTO;
+import com.project.apiserver.productboard.dto.ProductImageReadDTO;
 import com.project.apiserver.productboard.dto.ProductListDTO;
+import com.project.apiserver.productboard.dto.ProductReadDTO;
 import com.project.apiserver.productboard.entity.Product;
 import com.project.apiserver.productboard.repository.ProductRepository;
 
@@ -50,11 +53,28 @@ public class ProductServiceImpl implements ProductService {
 
     // 조회
     @Override
-    public ProductDTO readOne(Long pno) {
+    public ProductReadDTO readOne(Long pno) {
 
-        Product entity = repository.selectOne(pno);
+        List<ProductReadDTO> list = repository.selectOne(pno);
 
-        ProductDTO dto = modelMapper.map(entity, ProductDTO.class);
+        ProductReadDTO dto = ProductReadDTO
+        .builder()
+        .pno(list.get(0).getPno())
+        .delFlag(list.get(0).isDelFlag())
+        .pdesc(list.get(0).getPdesc())
+        .pname(list.get(0).getPname())
+        .price(list.get(0).getPrice())
+        .modDate(list.get(0).getModDate())
+        .mno(list.get(0).getMno())
+        .fname(String.join(",", list.stream().map(data -> data.getFname()).collect(Collectors.toList())))
+        .email(list.get(0).getEmail())
+        .nickname(list.get(0).getNickname())
+        .roleName(list.get(0).getRoleName())
+        .procatename(list.get(0).getProcatename())
+        .procateno(list.get(0).getProcateno())
+        .build();
+
+        log.info("-------------------------------");
         log.info(dto);
 
         return dto;
