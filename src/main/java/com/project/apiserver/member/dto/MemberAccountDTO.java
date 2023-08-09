@@ -8,7 +8,6 @@ import java.util.Map;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -61,26 +60,6 @@ public class MemberAccountDTO  implements UserDetails, OAuth2User {
 
     }
 
-
-    
-
-
-
-    // public MemberAccountDTO(Long mno, String email, String pw, String nickname, String roleName, String intro,boolean social,boolean delFlag) {
-    //     super(email, pw, getAuthorities(roleName));
-
-    //     this.mno = mno;
-    //     this.email = email;
-    //     this.pw = pw;
-    //     this.nickname = nickname;
-    //     this.roleName = roleName;
-    //     this.intro = intro;
-    //     this.social = social;
-    //     this.delFlag = delFlag;
-
-    // }
-
-
     @Override
     public Map<String, Object> getAttributes() {
 
@@ -90,7 +69,6 @@ public class MemberAccountDTO  implements UserDetails, OAuth2User {
 
     @Override
     public String getName() {
-
 
         return this.email;
     }
@@ -106,60 +84,30 @@ public class MemberAccountDTO  implements UserDetails, OAuth2User {
         return Collections.singletonList(authority);
     }
 
-
-
-
-
-
     @Override
     public String getPassword() {
         return this.pw;
     }
-
-
-
-
-
 
     @Override
     public String getUsername() {
         return this.email;
     }
 
-
-
-
-
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
-
-
-
-
-
 
     @Override
     public boolean isAccountNonLocked() {
         return !this.delFlag;
     }
 
-
-
-
-
-
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
-
-
-
-
 
     @Override
     public boolean isEnabled() {
