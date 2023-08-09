@@ -11,7 +11,6 @@ import org.springframework.test.annotation.Commit;
 
 import com.project.apiserver.common.PageRequestDTO;
 import com.project.apiserver.productboard.dto.ProductDTO;
-import com.project.apiserver.productboard.entity.ProductImage;
 import com.project.apiserver.productboard.service.ProductService;
 
 import jakarta.transaction.Transactional;
