@@ -30,6 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         log.info("-----------------------------loadUserByUsername--------------------------------");
         
         MemberAccount memberAccount = memberRepository.getInfoEmail(username);
+        log.info(memberAccount);
 
         if (memberAccount == null) {
             throw new UsernameNotFoundException("Not Found");
