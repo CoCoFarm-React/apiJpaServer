@@ -37,6 +37,9 @@ public class JWTCheckFilter extends OncePerRequestFilter {
         if(path.startsWith("/")){
             return true;
         }
+        if(path.endsWith(".ico")){
+            return true;
+        }
 
         // if(path.equals("/api/member/login")) {
         //     return true;
