@@ -18,6 +18,7 @@ import com.project.apiserver.common.PageRequestDTO;
 import com.project.apiserver.common.PageResponseDTO;
 import com.project.apiserver.productboard.dto.ProductDTO;
 import com.project.apiserver.productboard.dto.ProductListDTO;
+import com.project.apiserver.productboard.dto.ProductReadDTO;
 import com.project.apiserver.productboard.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
@@ -43,7 +44,7 @@ public class ProductController {
 
     // 조회
     @GetMapping("/{pno}")
-    public ProductDTO readOne(@PathVariable Long pno){
+    public ProductReadDTO readOne(@PathVariable Long pno){
 
         return productService.readOne(pno);
 

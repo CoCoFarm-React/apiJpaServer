@@ -68,6 +68,7 @@ public class ProductSearchImpl extends QuerydslRepositorySupport implements Prod
                 switch (typeword) {
                     case "n" -> searchBuilder.or(product.pname.contains(keyword));      // 상품이름
                     case "d" -> searchBuilder.or(product.pdesc.contains(keyword));      // 상품설명
+                    case "e" -> searchBuilder.or(product.member.email.contains(keyword));    // 이메일
                     case "m" -> searchBuilder.or(product.member.nickname.contains(keyword));    // 닉네임
                 }
             }
