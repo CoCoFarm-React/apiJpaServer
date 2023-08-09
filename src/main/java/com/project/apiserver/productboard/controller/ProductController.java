@@ -46,7 +46,8 @@ public class ProductController {
     @GetMapping("/{pno}")
     public ProductReadDTO readOne(@PathVariable Long pno){
 
-        return productService.readOne(pno);
+        // return productService.readOne(pno);
+        return null;
 
     }
 
