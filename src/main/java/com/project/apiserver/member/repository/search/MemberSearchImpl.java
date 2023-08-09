@@ -51,8 +51,6 @@ public class MemberSearchImpl extends QuerydslRepositorySupport implements Membe
                     case "e" -> searchBuilder.or(account.email.contains(keyword));
                     case "n" -> searchBuilder.or(account.nickname.contains(keyword));
                 }
-
-               
             }
              searchQuery.where(searchBuilder);
         }
