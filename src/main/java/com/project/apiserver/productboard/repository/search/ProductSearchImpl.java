@@ -56,6 +56,7 @@ public class ProductSearchImpl extends QuerydslRepositorySupport implements Prod
 
         // where 조건
         searchQuery.where(product.delFlag.eq(Boolean.FALSE));
+        searchQuery.where(image.ord.eq(0));
 
         // 검색 조건이 있을 때
         if(keyword != null && type != null) {
