@@ -33,9 +33,13 @@ public class ProductRepositoryTests {
     public void insertTest(){
 
         MemberAccount account = MemberAccount.builder().mno(3L).build();
-        ProductCategory category = ProductCategory.builder().procateno(1).build();
+        
+        for(int i=0; i<100; i++){
 
-        for(int i= 0; i<5; i ++){
+        for(int j= 1; j<=6; j++){
+            
+            ProductCategory category = ProductCategory.builder().procateno(j).build();
+
             Product product = Product.builder()
                             .pname("productTest")
                             .pdesc("descTest")
@@ -49,6 +53,7 @@ public class ProductRepositoryTests {
             product.addImage(UUID.randomUUID().toString()+"_ccc.jpg");
 
             repository.save(product);
+        }
         }
     }
 
