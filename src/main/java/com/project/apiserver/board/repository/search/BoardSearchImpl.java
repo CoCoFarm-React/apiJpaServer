@@ -80,6 +80,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
                 BoardListDTO.class,
                 qBoard.bno,
                 qBoard.title,
+                qBoard.content,
                 qMember.email,
                 qMember.nickname,
                 qBoard.category.catename,
