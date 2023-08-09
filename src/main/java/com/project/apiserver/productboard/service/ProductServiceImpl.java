@@ -1,23 +1,19 @@
 package com.project.apiserver.productboard.service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import com.project.apiserver.common.Category;
 import com.project.apiserver.common.FileUploader;
 import com.project.apiserver.common.PageRequestDTO;
 import com.project.apiserver.common.PageResponseDTO;
 import com.project.apiserver.common.ProductCategory;
-import com.project.apiserver.member.dto.MemberAccountDTO;
 import com.project.apiserver.member.entity.MemberAccount;
 import com.project.apiserver.productboard.dto.ProductDTO;
-import com.project.apiserver.productboard.dto.ProductImageReadDTO;
 import com.project.apiserver.productboard.dto.ProductListDTO;
 import com.project.apiserver.productboard.dto.ProductReadDTO;
 import com.project.apiserver.productboard.entity.Product;
