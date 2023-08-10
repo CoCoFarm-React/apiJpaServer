@@ -95,7 +95,7 @@ public class BoardRepositoryTests {
 
         PageRequestDTO pageRequestDTO = new PageRequestDTO(1, 10,null,null,2);
 
-        PageResponseDTO<BoardListDTO> responseDTO = boardRepository.searchSameWriter(515L, pageRequestDTO);
+        PageResponseDTO<BoardListDTO> responseDTO = boardRepository.searchSameWriter(3L, pageRequestDTO);
         log.info(responseDTO);
     }
 
