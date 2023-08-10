@@ -80,11 +80,12 @@ public class CustomOAuth2UserDetailsService extends DefaultOAuth2UserService {
                 .build();
         socialMember.changeRole(MemberAccountRole.CONSUMER);
         memberRepository.save(socialMember);
-
+        
         //MemberAccountDTO 구성 및 반환
         
         MemberAccountDTO memberAccountDTO = MemberAccountDTO
         .builder()
+        .mno(socialMember.getMno())
         .email(email)
         .pw(socialMember.getPw())
         .nickname(socialMember.getNickname())
@@ -98,6 +99,7 @@ public class CustomOAuth2UserDetailsService extends DefaultOAuth2UserService {
 
         MemberAccountDTO memberAccountDTO = MemberAccountDTO
         .builder()
+        .mno(memberAccount.getMno())
         .email(email)
         .pw(memberAccount.getPw())
         .nickname(memberAccount.getNickname())

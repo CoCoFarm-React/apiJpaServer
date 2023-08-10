@@ -12,11 +12,9 @@ import org.springframework.test.annotation.Commit;
 import com.project.apiserver.common.PageRequestDTO;
 import com.project.apiserver.common.ProductCategory;
 import com.project.apiserver.member.entity.MemberAccount;
-import com.project.apiserver.productboard.dto.ProductListDTO;
 import com.project.apiserver.productboard.dto.ProductReadDTO;
 import com.project.apiserver.productboard.entity.Product;
 import com.project.apiserver.productboard.repository.ProductRepository;
-import com.project.apiserver.productboard.repository.search.ProductSearchImpl;
 
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;

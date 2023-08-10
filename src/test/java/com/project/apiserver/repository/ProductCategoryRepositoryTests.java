@@ -7,10 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.project.apiserver.common.ProductCategory;
 import com.project.apiserver.common.ProudctCategoryRepository;
 
-import lombok.extern.log4j.Log4j2;
+
 
 @SpringBootTest
-@Log4j2
 public class ProductCategoryRepositoryTests {
     
     @Autowired

@@ -13,11 +13,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import lombok.extern.log4j.Log4j2;
+
 import net.coobird.thumbnailator.Thumbnailator;
 
 @Component
-@Log4j2
 public class FileUploader {
     
     // custom Exception
