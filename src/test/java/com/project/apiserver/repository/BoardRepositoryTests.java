@@ -4,6 +4,7 @@ import com.project.apiserver.member.entity.MemberAccount;
 
 import jakarta.transaction.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 
 import com.project.apiserver.board.dto.BoardListDTO;
+import com.project.apiserver.board.dto.BoardReadDTO;
 import com.project.apiserver.board.entity.Board;
 import com.project.apiserver.board.repository.BoardRepository;
 import com.project.apiserver.common.Category;
@@ -106,7 +108,11 @@ public class BoardRepositoryTests {
     @Transactional
     public void getBoardOne(){
 
-        log.info(boardRepository.getBoardInfo(100L));
+
+        boardRepository.incrementView(311L);
+       List<BoardReadDTO> data = boardRepository.selectOne(311L); 
+   
+       log.info(data);
 
     }
 

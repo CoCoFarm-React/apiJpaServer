@@ -1,9 +1,10 @@
 package com.project.apiserver.board.service;
 
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.project.apiserver.board.dto.BoardListDTO;
@@ -24,8 +25,7 @@ import lombok.extern.log4j.Log4j2;
 public class BoardServiceImpl implements BoardService {
 
     private final BoardRepository boardRepository;
-    private final ModelMapper modelMapper;
-    
+
     @Override
     public PageResponseDTO<BoardListDTO> getList(PageRequestDTO pageRequestDTO) {
         
@@ -34,12 +34,28 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardReadDTO getOne(Long bno) {
+        boardRepository.incrementView(bno);
+        log.info("GET read................................");
+        List<BoardReadDTO> readList =boardRepository.selectOne(bno);
+        
+        BoardReadDTO dto = BoardReadDTO
+        .builder()
+        .bno(readList.get(0).getBno())
+        .title(readList.get(0).getTitle())
+        .content(readList.get(0).getContent())
+        .email(readList.get(0).getEmail())
+        .nickname(readList.get(0).getNickname())
+        .catename(readList.get(0).getCatename())
+        .cateno(readList.get(0).getCateno())
+        .mno(readList.get(0).getMno())
+        .regDate(readList.get(0).getRegDate())
+        .modDate(readList.get(0).getModDate())
+        .delFlag(readList.get(0).isDelFlag())
+        .fname(String.join(",", readList.stream().map(data -> data.getFname()).collect(Collectors.toList())))
+        .view(readList.get(0).getView())
+        .build();
 
-       
-
-       //BoardListDTO board = boardRepository.getBoard(bno);
-
-        return boardRepository.getBoardInfo(bno);
+        return dto;
         
     }
 

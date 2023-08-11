@@ -31,7 +31,7 @@ public class BoardListDTO {
     private Long rcnt;
 
     private Long mno;
-    
+    private Integer view;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regDate;

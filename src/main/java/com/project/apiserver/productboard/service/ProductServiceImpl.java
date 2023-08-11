@@ -49,8 +49,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductReadDTO readOne(Long pno) {
 
+        repository.incrementView(pno);
         List<ProductReadDTO> list = repository.selectOne(pno);
-
+        
         ProductReadDTO dto = ProductReadDTO
         .builder()
         .pno(list.get(0).getPno())

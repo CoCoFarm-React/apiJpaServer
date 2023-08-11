@@ -36,7 +36,7 @@ public class ProductReadDTO {
     private String procatename;
 
     private String fname; // pi.fname에 해당하는 필드 추가
-
+    private Integer view;
     // @Builder.Default
     // private List<String> images = new ArrayList<>();
 

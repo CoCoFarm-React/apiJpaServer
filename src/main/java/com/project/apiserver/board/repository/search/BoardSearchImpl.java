@@ -155,6 +155,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
                 qBoard.category.catename,
                 qBoard.category.cateno,
                 qBoard.regDate,
+                qBoard.view,
                 qReply.countDistinct().as("rcnt")));
 
         long totalCount = listQuery.fetchCount();
