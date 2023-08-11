@@ -51,7 +51,7 @@ public class Board extends BaseEntity {
     @Builder.Default
     private List<BoardImage> images = new ArrayList<>();
 
-    @Column(columnDefinition = "integer default 0", nullable = false)
+    @Column(columnDefinition = "integer default 0")
     private Integer view;
 
     // 상품을 추가하는 method

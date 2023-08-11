@@ -88,6 +88,7 @@ public class ProductServiceImpl implements ProductService {
             .pdesc(dto.getPdesc())
             .price(dto.getPrice())
             .member(member)
+            .view(dto.getView())
             .category(category).build();
 
         dto.getImages().forEach(img -> {

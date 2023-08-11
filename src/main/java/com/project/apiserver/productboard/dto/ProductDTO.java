@@ -26,6 +26,7 @@ public class ProductDTO {
 
     private Long mno;
     private Integer procateno;
+    private Integer view;
 
     @Builder.Default
     private List<String> images = new ArrayList<>();

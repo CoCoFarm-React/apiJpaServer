@@ -70,6 +70,7 @@ public class BoardServiceImpl implements BoardService {
         .content(boardReadDTO.getContent())
         .category(dtoCategory)
         .member(accountDTO)
+        .view(boardReadDTO.getView())
         .build();
 
         log.info("Mapping data");
