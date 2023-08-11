@@ -107,6 +107,7 @@ public class CustomOAuth2UserDetailsService extends DefaultOAuth2UserService {
         .delFlag(memberAccount.isDelFlag())
         .social(memberAccount.isSocial())
         .roleName(memberAccount.getRoleName().toString())
+        .address(memberAccount.getAddress())
         .build();
 
         return memberAccountDTO;

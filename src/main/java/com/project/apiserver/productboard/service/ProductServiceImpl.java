@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.project.apiserver.common.FileUploader;
@@ -28,7 +27,6 @@ import lombok.extern.log4j.Log4j2;
 public class ProductServiceImpl implements ProductService {
     
     private final ProductRepository repository;
-    private final ModelMapper modelMapper;
     private final FileUploader fileUploader;
 
     // 목록
@@ -94,6 +92,7 @@ public class ProductServiceImpl implements ProductService {
         dto.getImages().forEach(img -> {
             log.info(img);
             product.addImage(img);
+            log.info("end of product add");
         });
 
         repository.save(product);

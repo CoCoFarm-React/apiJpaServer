@@ -46,22 +46,20 @@ public class ProductController {
     @GetMapping("/{pno}")
     public ProductReadDTO readOne(@PathVariable Long pno){
 
-        // return productService.readOne(pno);
-        return null;
+        return productService.readOne(pno);
+        // return null;
 
     }
 
     // 등록
     @PostMapping("/")
-    public Map<String, String> register(@RequestBody ProductDTO dto){
+    public Map<String, String> register(ProductDTO productDTO){
+        log.info("=-============================");
+        log.info("post...................");
+        List<String> fileNames = fileUploader.uploadFiles(productDTO.getFiles(), true);
+        productDTO.setImages(fileNames);
 
-        // 이미지가 있을 때
-        if(dto.getFiles() != null && dto.getFiles().size() > 0) {
-            List<String> fileNames = fileUploader.uploadFiles(dto.getFiles(), true);
-            dto.setImages(fileNames);
-        }
-
-        productService.register(dto);
+        productService.register(productDTO);
 
         return Map.of("result", "success");
 
@@ -79,17 +77,14 @@ public class ProductController {
 
     // 수정
     @PutMapping("/")
-    public Map<String, String> modify(@RequestBody ProductDTO dto){
+    public Map<String, String> modify(@RequestBody ProductDTO productDTO){
 
-        if (dto.getFiles() != null && dto.getFiles().size() > 0) {
-			List<String> uploadFileNames = fileUploader.uploadFiles(dto.getFiles(), true);
-
-			List<String> oldFileNames = dto.getImages();
-
-			uploadFileNames.forEach(fname -> oldFileNames.add(fname));
-		}
-
-        productService.modify(dto);
+        // 이미지가 있을 때
+        if(productDTO.getFiles() != null && productDTO.getFiles().size() > 0) {
+            List<String> fileNames = fileUploader.uploadFiles(productDTO.getFiles(), true);
+            productDTO.setImages(fileNames);
+        }
+        productService.modify(productDTO);
 
         return Map.of("result", "success");
 

@@ -34,6 +34,7 @@ public class MemberAccountDTO  implements UserDetails, OAuth2User {
     private String intro;
     private boolean delFlag;
     private boolean social;
+    private String address;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regDate;
@@ -55,6 +56,7 @@ public class MemberAccountDTO  implements UserDetails, OAuth2User {
         map.put("intro", intro);
         map.put("delFlag", delFlag);
         map.put("social", social);
+        map.put("address", address);
 
         return map;
 
@@ -72,11 +74,6 @@ public class MemberAccountDTO  implements UserDetails, OAuth2User {
 
         return this.email;
     }
-
-
-
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -113,5 +110,6 @@ public class MemberAccountDTO  implements UserDetails, OAuth2User {
     public boolean isEnabled() {
         return true;
     }
+   
 
 }

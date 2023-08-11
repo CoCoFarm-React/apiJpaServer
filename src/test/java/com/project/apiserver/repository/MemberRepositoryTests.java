@@ -125,6 +125,27 @@ public class MemberRepositoryTests {
         log.info(account);
     }
 
+    @Test
+    @Transactional
+    @Commit
+    // 소셜 로그인 사용자 회원수정가입
+    public void registerMember(){
+
+
+        Optional<MemberAccount> memberAccount =repository.findById(503L);
+        MemberAccount account = memberAccount.orElseThrow();
+
+        account.changeIntro("소셜 회원가입 인트로");
+        account.changeNickname("소셜 회원가입 닉네임");
+        account.changePw(passwordEncoder.encode("1111"));
+        account.changeSocialFalse();
+        account.changeAddress("소셜 회원가입 주소");
+
+        repository.save(account);
+
+
+    }
+
 
 
     

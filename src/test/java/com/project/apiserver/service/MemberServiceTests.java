@@ -3,8 +3,9 @@ package com.project.apiserver.service;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-
+import com.project.apiserver.member.dto.MemberAccountDTO;
 import com.project.apiserver.member.dto.MemberPageRequestDTO;
 import com.project.apiserver.member.service.MemberService;
 import lombok.extern.log4j.Log4j2;
@@ -16,7 +17,8 @@ public class MemberServiceTests {
     @Autowired(required = false)
     MemberService service;
 
-    
+    @Autowired
+    PasswordEncoder passwordEncoder;   
 
     @Test
     public void getMemberList(){
@@ -53,21 +55,20 @@ public class MemberServiceTests {
     @Test
     public void deleteMember(){
         service.deleteMember(8L);
-
     }
 
     @Test
     public void registerMemberTest(){
-
-        // MemberAccountDTO dto = MemberAccountDTO.builder()
-        //     .email("aaa@naver.com")
-        //     .pw("12345")
-        //     .nickname("nickname")   
-        //     .intro("intro") 
-        //     .roleName(MemberAccountRole.FARMER.toString())
-        //     .build();
-
-        // service.registerMember(dto);
+        log.info("insert start");
+        MemberAccountDTO dto = MemberAccountDTO.builder().email("aaa1223@email.com")
+        .pw(passwordEncoder.encode("1111"))
+        .nickname("serviceTestInesrt")
+        .intro("서비스테스트용DTO소개")
+        .roleName("FARMER")
+        .build();
+        log.info("set dto");
+        service.registerMember(dto);
+        log.info("success");
 
     }
 }
