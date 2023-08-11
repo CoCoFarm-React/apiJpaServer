@@ -94,6 +94,7 @@ public class ProductServiceImpl implements ProductService {
         dto.getImages().forEach(img -> {
             log.info(img);
             product.addImage(img);
+            log.info("end of product add");
         });
 
         repository.save(product);

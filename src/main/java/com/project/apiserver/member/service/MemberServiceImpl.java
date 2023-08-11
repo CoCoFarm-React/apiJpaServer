@@ -83,7 +83,9 @@ public class MemberServiceImpl implements MemberService {
         member.changeNickname(memberAccountDTO.getNickname());
         member.changePw(memberAccountDTO.getPw());
         member.changeIntro(memberAccountDTO.getIntro());
-
+        member.changeAddress(memberAccountDTO.getAddress());
+        member.changeSocialFalse();
+        log.info("modify service3 --------------");
         repository.save(member);
         
     }
@@ -92,9 +94,16 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void registerMember(MemberAccountDTO accountDTO) {
 
-        MemberAccount member = modelMapper.map(accountDTO, MemberAccount.class);
+        Optional<MemberAccount> memberAccount = repository.findById(accountDTO.getMno());
+        MemberAccount account = memberAccount.orElseThrow();
 
-        repository.save(member);
+        account.changeIntro(accountDTO.getIntro());
+        account.changeNickname(accountDTO.getNickname());
+        account.changePw(accountDTO.getPw());
+        account.changeSocialFalse();
+        account.changeAddress(accountDTO.getAddress());
+
+        repository.save(account);
 
     }
 

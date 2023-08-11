@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @RestController
-@RequestMapping("/api/admin/")
+@RequestMapping("/api/")
 @RequiredArgsConstructor
 @CrossOrigin
 @Log4j2
@@ -35,7 +35,7 @@ public class MemberContoller {
 
 
     // @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("farmer")
+    @GetMapping("admin/farmer")
     public MemberPageResponseDTO<MemberAccountDTO> getFarmerList(@ParameterObject MemberPageRequestDTO memberPageRequestDTO){
         log.info("test");
         memberPageRequestDTO.setRoleName("FARMER"); 
@@ -44,7 +44,7 @@ public class MemberContoller {
 
     }
     // @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("consumer")
+    @GetMapping("admin/consumer")
     public MemberPageResponseDTO<MemberAccountDTO> getConsumerList(@ParameterObject MemberPageRequestDTO pageRequestDTO){
 
         pageRequestDTO.setRoleName("CONSUMER");
@@ -54,16 +54,16 @@ public class MemberContoller {
 
 
     @PostMapping("")
-    public Map<String, String> registerMember(@RequestBody MemberAccountDTO accountDTO){
+    public Map<String, String> registerMember(@RequestBody MemberAccountDTO memberAccountDTO){
 
-        memberService.registerMember(accountDTO);
+        memberService.registerMember(memberAccountDTO);
 
         return Map.of("result", "succeess");
 
     }
 
     // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_CONSUMER','ROLE_FARMER')")
-    @GetMapping("read/{mno}")
+    @GetMapping("admin/read/{mno}")
     public MemberAccountDTO getOne(@PathVariable Long mno){
 
 
@@ -71,7 +71,7 @@ public class MemberContoller {
     }    
 
     // @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_CONSUMER','ROLE_FARMER')")
-    @DeleteMapping("{mno}")
+    @DeleteMapping("admin/{mno}")
     public Map<String, String> deleteMember(@PathVariable Long mno) {
 
         
@@ -81,13 +81,24 @@ public class MemberContoller {
     }
 
     // @PreAuthorize("hasAnyRole('ROLE_CONSUMER','ROLE_FARMER')")
-    @PutMapping("modify")
-    public Map<String, String> modifyMember(@RequestBody MemberAccountDTO accountDTO){
+    @PutMapping("member/modify")
+    public Map<String, String> modifyMember(@RequestBody MemberAccountDTO memberAccountDTO){
 
-        memberService.modifyMember(accountDTO);
+        log.info("ModifyConsumer ------------------------------------------ ");
+        log.info(memberAccountDTO);
+        memberService.modifyMember(memberAccountDTO);
 
         return Map.of("result", "succeess");
 
+    }
+
+    @PostMapping("member/register")
+    public Map<String,String> registerConsumer(MemberAccountDTO memberAccountDTO){
+
+
+            memberService.registerMember(memberAccountDTO);
+
+        return Map.of("result","succsess");
     }
     
 

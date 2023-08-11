@@ -1,6 +1,9 @@
 package com.project.apiserver.board.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -17,13 +20,14 @@ import lombok.ToString;
 @Builder
 public class BoardReadDTO {
     
+
     private Long bno;
     private String title;
     private String content;
     private String email;
     private String nickname;
     private String catename;
-
+    // private List<MultipartFile> file;
     
     private Integer cateno;
 
