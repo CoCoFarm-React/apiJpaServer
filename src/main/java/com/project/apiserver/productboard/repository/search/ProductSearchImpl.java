@@ -53,7 +53,6 @@ public class ProductSearchImpl extends QuerydslRepositorySupport implements Prod
         searchQuery.leftJoin(product.member, member);
         searchQuery.leftJoin(product.images, image);
 
-
         // where 조건
         searchQuery.where(product.delFlag.eq(Boolean.FALSE));
         searchQuery.where(image.ord.eq(0));
@@ -87,12 +86,13 @@ public class ProductSearchImpl extends QuerydslRepositorySupport implements Prod
             product.pname,
             product.price,
             product.modDate,
-            product.member.mno,
-            product.member.email,
-            product.member.nickname,
-            product.member.roleName,
-            product.category.procatename,
-            product.category.procateno
+            member.mno,
+            member.nickname,
+            member.email,
+            member.roleName,
+            category.procatename,
+            category.procateno,
+            image.fname
         ));
 
         long totalCount = listQuery.fetchCount();

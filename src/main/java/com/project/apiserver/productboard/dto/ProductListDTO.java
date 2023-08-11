@@ -38,8 +38,7 @@ public class ProductListDTO {
     private Integer procateno;
     private String procatename;
 
-    @Builder.Default
-    private List<String> images = new ArrayList<>();
+    private String fname;
 
     // 등록, 수정 업로드 된 파일 데이터를 수집하는 용도
     @Builder.Default

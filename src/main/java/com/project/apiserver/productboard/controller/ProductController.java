@@ -81,6 +81,14 @@ public class ProductController {
     @PutMapping("/")
     public Map<String, String> modify(@RequestBody ProductDTO dto){
 
+        if (dto.getFiles() != null && dto.getFiles().size() > 0) {
+			List<String> uploadFileNames = fileUploader.uploadFiles(dto.getFiles(), true);
+
+			List<String> oldFileNames = dto.getImages();
+
+			uploadFileNames.forEach(fname -> oldFileNames.add(fname));
+		}
+
         productService.modify(dto);
 
         return Map.of("result", "success");
