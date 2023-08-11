@@ -18,11 +18,11 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class BoardReadDTO {
-    
+@Builder  
+public class BoardDTO {
+ 
 
-    private Long bno;
+private Long bno;
     private String title;
     private String content;
     private String email;
@@ -48,5 +48,5 @@ public class BoardReadDTO {
     // 등록, 수정 업로드 된 파일 데이터를 수집하는 용도
     @Builder.Default
     private List<MultipartFile> files = new ArrayList<>();
-    
+  
 }
