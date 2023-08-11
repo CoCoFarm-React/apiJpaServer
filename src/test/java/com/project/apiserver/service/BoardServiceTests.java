@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.project.apiserver.board.dto.BoardReadDTO;
 import com.project.apiserver.board.service.BoardService;
 import com.project.apiserver.common.PageRequestDTO;
 
@@ -54,5 +55,19 @@ public class BoardServiceTests {
 
 //     }
 
-    
+    @Test
+    public void insertBoardTest(){
+
+        BoardReadDTO boardReadDTO = BoardReadDTO
+        .builder()
+        .title("servicetest")
+        .content("Service testsssss")
+        .email("aaa499@email.com")
+        .mno(500L)
+        .cateno(1)
+        .build();
+        log.info("service insert before");
+        boardService.registBoard(boardReadDTO);
+        log.info("finish insert");
+    }
 }

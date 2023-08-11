@@ -46,6 +46,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         .intro(memberAccount.getIntro())
         .social(memberAccount.isSocial())
         .delFlag(memberAccount.isDelFlag())
+        .address(memberAccount.getAddress())
         .build();
      
             

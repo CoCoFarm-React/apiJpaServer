@@ -52,7 +52,7 @@ public class MemberContoller {
     }
 
 
-    @PostMapping("")
+    @PostMapping("member")
     public Map<String, String> registerMember(@RequestBody MemberAccountDTO memberAccountDTO){
 
         memberService.registerMember(memberAccountDTO);

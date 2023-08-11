@@ -6,7 +6,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.project.apiserver.member.dto.MemberAccountDTO;
-import com.project.apiserver.member.dto.MemberAccountRole;
 import com.project.apiserver.member.dto.MemberPageRequestDTO;
 import com.project.apiserver.member.service.MemberService;
 import lombok.extern.log4j.Log4j2;
@@ -60,17 +59,16 @@ public class MemberServiceTests {
 
     @Test
     public void registerMemberTest(){
-
-        MemberAccountDTO dto = MemberAccountDTO.builder()
-            .mno(503L)
-            .pw(passwordEncoder.encode("1111"))
-            .nickname("nickname")
-            .intro("intro") 
-            .roleName(MemberAccountRole.CONSUMER.toString())
-            .address("소셜 회원 주소")
-            .build();
-
+        log.info("insert start");
+        MemberAccountDTO dto = MemberAccountDTO.builder().email("aaa1223@email.com")
+        .pw(passwordEncoder.encode("1111"))
+        .nickname("serviceTestInesrt")
+        .intro("서비스테스트용DTO소개")
+        .roleName("FARMER")
+        .build();
+        log.info("set dto");
         service.registerMember(dto);
+        log.info("success");
 
     }
 }

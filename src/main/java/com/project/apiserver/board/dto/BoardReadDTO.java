@@ -38,5 +38,7 @@ public class BoardReadDTO {
     private LocalDateTime modDate;
 
     private boolean delFlag;
+
+    private Long mno;
     
 }
