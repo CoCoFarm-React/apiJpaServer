@@ -4,6 +4,8 @@ import com.project.apiserver.member.entity.MemberAccount;
 
 import jakarta.transaction.Transactional;
 
+import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -123,6 +125,34 @@ public class BoardRepositoryTests {
             boardRepository.save(board);
         }
     }
+
+    // song
+    // 등록
+    @Test
+    public void insertImageTest(){
+
+        Category category = Category
+        .builder()
+        .cateno(2)
+        .catename("재배일지")
+        .build();
+        
+        MemberAccount member = MemberAccount.builder().mno(3L).build();
+
+        Board board = Board.builder()
+        .bno(312L)
+        .category(category)
+        .member(member)
+        .title("보드 이미지등록테스트~")
+        .content("SongMK" )
+        .build();
+            
+            board.addImage(UUID.randomUUID().toString()+ "_aaa.jpg");
+            // board.addImage(UUID.randomUUID().toString()+"_bbb.jpg");
+            // board.addImage(UUID.randomUUID().toString()+"_ccc.jpg");
+
+            boardRepository.save(board);
+        }
 
     
 }
