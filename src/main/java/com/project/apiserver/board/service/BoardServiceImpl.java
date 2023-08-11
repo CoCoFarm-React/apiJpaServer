@@ -10,15 +10,17 @@ import com.project.apiserver.board.dto.BoardListDTO;
 import com.project.apiserver.board.dto.BoardReadDTO;
 import com.project.apiserver.board.entity.Board;
 import com.project.apiserver.board.repository.BoardRepository;
-
+import com.project.apiserver.common.Category;
 import com.project.apiserver.common.PageRequestDTO;
 import com.project.apiserver.common.PageResponseDTO;
+import com.project.apiserver.member.entity.MemberAccount;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @Service
 @RequiredArgsConstructor
-
+@Log4j2
 public class BoardServiceImpl implements BoardService {
 
     private final BoardRepository boardRepository;
@@ -43,9 +45,18 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public void registBoard(BoardReadDTO boardReadDTO) {
-        
-        Board board = modelMapper.map(boardReadDTO, Board.class);
+        log.info("service11111111111111111111111111111111111111111111111");
+        // Board board = modelMapper.map(boardReadDTO, Board.class);
+        Category dtoCategory = Category.builder().cateno(boardReadDTO.getCateno()).catename(boardReadDTO.getCatename()).build();
+        MemberAccount accountDTO = MemberAccount.builder().mno(boardReadDTO.getMno()).build();
+        Board board = Board.builder()
+        .title(boardReadDTO.getTitle())
+        .content(boardReadDTO.getContent())
+        .category(dtoCategory)
+        .member(accountDTO)
+        .build();
 
+        log.info("Mapping data");
         boardRepository.save(board);
     }
 

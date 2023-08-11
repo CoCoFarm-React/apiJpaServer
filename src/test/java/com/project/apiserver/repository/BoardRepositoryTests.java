@@ -31,11 +31,11 @@ public class BoardRepositoryTests {
 
         Category category = Category
         .builder()
-        .cateno(1)
-        .catename("관리자문의")
+        .cateno(2)
+        .catename("재배일지")
         .build();
 
-        MemberAccount member = MemberAccount.builder().mno(3L).build();
+        MemberAccount member = MemberAccount.builder().mno(4L).build();
         
         log.info("Start insert");
 
@@ -44,8 +44,8 @@ public class BoardRepositoryTests {
             Board board = Board.builder()
                     .category(category)
                     .member(member)
-                    .title("문의좀 넣는다" + i)
-                    .content("농부가 문의넣는 게시글" + i)
+                    .title("재배일지" + i)
+                    .content("재배일지 내용" + i)
                     .build();
 
             boardRepository.save(board);
@@ -95,7 +95,7 @@ public class BoardRepositoryTests {
 
         PageRequestDTO pageRequestDTO = new PageRequestDTO(1, 10,null,null,2);
 
-        PageResponseDTO<BoardListDTO> responseDTO = boardRepository.searchSameWriter(515L, pageRequestDTO);
+        PageResponseDTO<BoardListDTO> responseDTO = boardRepository.searchSameWriter(3L, pageRequestDTO);
         log.info(responseDTO);
     }
 
@@ -111,7 +111,7 @@ public class BoardRepositoryTests {
     @Test
     public void addDummy(){
         Category category = Category.builder().cateno(3).build();
-        MemberAccount memberAccount = MemberAccount.builder().mno(512L).build(); 
+        MemberAccount memberAccount = MemberAccount.builder().mno(480L).build(); 
         for(int i = 0; i < 100; i++){
             Board board = Board.builder()
             .category(category)

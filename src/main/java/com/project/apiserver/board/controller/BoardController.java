@@ -65,8 +65,11 @@ public class BoardController {
     // 게시글 등록
     @PostMapping("")
     public Map<String, String> registBoard(BoardReadDTO boardReadDTO) {
-
+        log.info("testsdasdasdadasdsadasdadsa");
+        log.info(boardReadDTO);
         boardService.registBoard(boardReadDTO);
+        log.info(boardReadDTO);
+
         return Map.of("result", "success");
     }
 

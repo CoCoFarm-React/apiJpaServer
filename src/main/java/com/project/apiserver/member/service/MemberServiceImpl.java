@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.project.apiserver.member.entity.MemberAccount;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.project.apiserver.member.dto.MemberAccountDTO;
@@ -21,6 +22,7 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository repository;
     private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
     // Read table one row
     @Override
     public MemberAccountDTO getOne(Long mno) {
@@ -81,9 +83,11 @@ public class MemberServiceImpl implements MemberService {
         log.info("modify service.2......................");
 
         member.changeNickname(memberAccountDTO.getNickname());
-        member.changePw(memberAccountDTO.getPw());
+        member.changePw(passwordEncoder.encode(memberAccountDTO.getPw()));
         member.changeIntro(memberAccountDTO.getIntro());
-
+        member.changeAddress(memberAccountDTO.getAddress());
+        member.changeSocialFalse();
+        log.info("modify service3 --------------");
         repository.save(member);
         
     }
@@ -92,9 +96,18 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void registerMember(MemberAccountDTO accountDTO) {
 
-        MemberAccount member = modelMapper.map(accountDTO, MemberAccount.class);
+        
 
-        repository.save(member);
+        MemberAccount account = MemberAccount.builder()
+        .email(accountDTO.getEmail())
+        .pw(passwordEncoder.encode(accountDTO.getPw()))
+        .nickname(accountDTO.getNickname())
+        .intro(accountDTO.getIntro())
+        .roleName(accountDTO.getRoleName())
+        .address(accountDTO.getAddress())
+        .build();
+
+        repository.save(account);
 
     }
 
