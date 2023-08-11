@@ -84,5 +84,17 @@ public class FileUploader {
         return uploadFileNames;
 
     }
+    public String uploadProfile(MultipartFile profile){
+        if( profile==null ||profile.getSize()==0) throw new UploadException("No File");
+
+        String resultName;
+
+        String orginal = profile.getOriginalFilename();
+        String uuid = UUID.randomUUID().toString();
+        String saveFileName = uuid + "_" + orginal;
+        File saveFile = new File(path,saveFileName);
+
+        return null;
+    }
 
 }

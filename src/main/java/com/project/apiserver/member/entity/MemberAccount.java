@@ -46,7 +46,6 @@ public class MemberAccount extends BaseEntity {
 
     // 0810 차은우 추가
     private String address;
-
     // Role 추가하는 메소드
     public void changeRole(MemberAccountRole role) {
         roleName = role.getRoleName();

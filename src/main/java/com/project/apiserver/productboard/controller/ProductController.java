@@ -77,7 +77,7 @@ public class ProductController {
 
     // 수정
     @PutMapping("/")
-    public Map<String, String> modify(@RequestBody ProductDTO productDTO){
+    public Map<String, String> modify( ProductDTO productDTO){
 
         // 이미지가 있을 때
         if(productDTO.getFiles() != null && productDTO.getFiles().size() > 0) {

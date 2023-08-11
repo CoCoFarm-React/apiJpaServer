@@ -27,7 +27,11 @@ public class ProductServiceTests {
     @Transactional
     public void getListTest(){
 
-        // productService.getList();
+        PageRequestDTO pageRequestDTO = new PageRequestDTO();
+
+         
+
+         log.info(productService.getList(pageRequestDTO));
 
     }
 
