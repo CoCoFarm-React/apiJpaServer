@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,7 +52,7 @@ public class MemberContoller {
 
 
     @PostMapping("member")
-    public Map<String, String> registerMember(@RequestBody MemberAccountDTO memberAccountDTO){
+    public Map<String, String> registerMember( MemberAccountDTO memberAccountDTO){
 
         memberService.registerMember(memberAccountDTO);
 
@@ -81,7 +80,7 @@ public class MemberContoller {
 
     // @PreAuthorize("hasAnyRole('ROLE_CONSUMER','ROLE_FARMER')")
     @PutMapping("member/modify")
-    public Map<String, String> modifyMember(@RequestBody MemberAccountDTO memberAccountDTO){
+    public Map<String, String> modifyMember( MemberAccountDTO memberAccountDTO){
 
         log.info("ModifyConsumer ------------------------------------------ ");
         log.info(memberAccountDTO);
@@ -90,16 +89,6 @@ public class MemberContoller {
         return Map.of("result", "succeess");
 
     }
-
-    @PostMapping("member/register")
-    public Map<String,String> registerConsumer(MemberAccountDTO memberAccountDTO){
-
-
-            memberService.registerMember(memberAccountDTO);
-
-        return Map.of("result","succsess");
-    }
-    
 
 
 }

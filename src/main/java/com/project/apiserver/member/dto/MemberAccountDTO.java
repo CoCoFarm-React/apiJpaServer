@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -35,6 +36,8 @@ public class MemberAccountDTO  implements UserDetails, OAuth2User {
     private boolean delFlag;
     private boolean social;
     private String address;
+    private String profile;
+    private MultipartFile file;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regDate;
@@ -57,7 +60,7 @@ public class MemberAccountDTO  implements UserDetails, OAuth2User {
         map.put("delFlag", delFlag);
         map.put("social", social);
         map.put("address", address);
-
+        map.put("profile",profile);
         return map;
 
     }

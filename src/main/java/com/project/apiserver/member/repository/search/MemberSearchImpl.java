@@ -14,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPQLQuery;
 
@@ -71,8 +70,8 @@ public class MemberSearchImpl extends QuerydslRepositorySupport implements Membe
             account.regDate,
             account.modDate,
             account.intro,
-            account.roleName
-        
+            account.roleName,
+            account.profile
         ));
 
         List<MemberAccountDTO> accountDTOs = queryDto.fetch();

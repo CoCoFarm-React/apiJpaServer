@@ -44,6 +44,13 @@ public class FileUploader {
             original.delete();
         }
     }
+    public void removeProfile(String profileName){
+        if(profileName == null || profileName.trim().length()==0) return;
+
+        File orginal = new File (path, profileName);
+        orginal.delete();
+    }
+
 
     // 파일 업로드
     public List<String> uploadFiles(List<MultipartFile> files, boolean makeThumb) {
@@ -87,14 +94,19 @@ public class FileUploader {
     public String uploadProfile(MultipartFile profile){
         if( profile==null ||profile.getSize()==0) throw new UploadException("No File");
 
-        String resultName;
-
         String orginal = profile.getOriginalFilename();
         String uuid = UUID.randomUUID().toString();
         String saveFileName = uuid + "_" + orginal;
         File saveFile = new File(path,saveFileName);
 
-        return null;
+        try(InputStream in = profile.getInputStream(); OutputStream out = new FileOutputStream(saveFile)){
+            FileCopyUtils.copy(in,out);
+
+        }catch (Exception e){
+            throw new UploadException("Upload Fail " + e.getMessage());
+        }
+
+        return saveFileName;
     }
 
 }
