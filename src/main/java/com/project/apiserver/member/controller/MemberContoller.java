@@ -4,7 +4,6 @@ package com.project.apiserver.member.controller;
 import java.util.Map;
 
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
