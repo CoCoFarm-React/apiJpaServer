@@ -7,6 +7,7 @@ import com.project.apiserver.member.entity.MemberAccount;
 import com.project.apiserver.member.repository.MemberRepository;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,26 +33,40 @@ public class MemberRepositoryTests {
     @Test
     public void insertTest(){
 
-        for(int i = 0; i<500; i++){
-        MemberAccount member = MemberAccount.builder()
-        .email("aaa" +i+"@email.com")
-        .pw(passwordEncoder.encode("1111"))
-        .nickname("nickname"+ i)
-        .intro("자소개" + i)
-        .build();
+        // for(int i = 0; i<500; i++){
+        // MemberAccount member = MemberAccount.builder()
+        // .email("aaa" +i+"@email.com")
+        // .pw(passwordEncoder.encode("1111"))
+        // .nickname("nickname"+ i)
+        // .intro("자소개" + i)
+        // .build();
 
-        switch(i%2){
+        // switch(i%2){
 
-            case 0:
-                member.changeRole(MemberAccountRole.FARMER);
-            break;
-            case 1:
-                member.changeRole(MemberAccountRole.CONSUMER);
-            break;
-        }
+        //     case 0:
+        //         member.changeRole(MemberAccountRole.FARMER);
+        //     break;
+        //     case 1:
+        //         member.changeRole(MemberAccountRole.CONSUMER);
+        //     break;
+        // }
         
-        repository.save(member);
-        }
+        // repository.save(member);
+        // }
+        // 파일 업로드 처리된 멤버 추가
+        log.info("before insert-------------------");
+        MemberAccount account = MemberAccount.builder()
+        .email("profilewith2@email.com")
+        .pw(passwordEncoder.encode("123455"))
+        .nickname("프로필 테스트")
+        .intro("난 사진이있어요")
+        .roleName("FARMER")
+        .address("서울시 종로구 살아요")
+        .profile(UUID.randomUUID()+"_"+"profile.jpg")
+        .build();
+        repository.save(account);
+        log.info("after insert-------------------");        
+
     }
     // 임시 관리자를 넣기위한 관리자
     @Test
@@ -77,12 +92,12 @@ public class MemberRepositoryTests {
        log.info(repository.search(page));
 
     }
-
+    
     @Test
     public void getOne(){
       
         MemberAccount one =  repository.getOne(6L);
-
+        
         log.info(one);
        
 

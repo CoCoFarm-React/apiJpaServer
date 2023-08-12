@@ -44,7 +44,7 @@ public class BoardController {
     public PageResponseDTO<BoardListDTO> getList(
             // queryString 값으로 받아옴
             @ParameterObject PageRequestDTO pageRequestDTO) {
-
+                
         pageRequestDTO.setCategory(
                pageRequestDTO.getCateno() == null || pageRequestDTO.getCateno() <= 0 ? 5 : pageRequestDTO.getCateno());
         return boardService.getList(pageRequestDTO);

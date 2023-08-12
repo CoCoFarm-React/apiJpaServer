@@ -4,12 +4,16 @@ import com.project.apiserver.member.entity.MemberAccount;
 
 import jakarta.transaction.Transactional;
 
+import java.util.List;
+import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
 import com.project.apiserver.board.dto.BoardListDTO;
+import com.project.apiserver.board.dto.BoardReadDTO;
 import com.project.apiserver.board.entity.Board;
 import com.project.apiserver.board.repository.BoardRepository;
 import com.project.apiserver.common.Category;
@@ -104,7 +108,11 @@ public class BoardRepositoryTests {
     @Transactional
     public void getBoardOne(){
 
-        log.info(boardRepository.getBoardInfo(100L));
+
+        boardRepository.incrementView(311L);
+       List<BoardReadDTO> data = boardRepository.selectOne(311L); 
+   
+       log.info(data);
 
     }
 
@@ -123,6 +131,34 @@ public class BoardRepositoryTests {
             boardRepository.save(board);
         }
     }
+
+    // song
+    // 등록
+    @Test
+    public void insertImageTest(){
+
+        Category category = Category
+        .builder()
+        .cateno(2)
+        .catename("재배일지")
+        .build();
+        
+        MemberAccount member = MemberAccount.builder().mno(3L).build();
+
+        Board board = Board.builder()
+        .bno(312L)
+        .category(category)
+        .member(member)
+        .title("보드 이미지등록테스트~")
+        .content("SongMK" )
+        .build();
+            
+            board.addImage(UUID.randomUUID().toString()+ "_aaa.jpg");
+            // board.addImage(UUID.randomUUID().toString()+"_bbb.jpg");
+            // board.addImage(UUID.randomUUID().toString()+"_ccc.jpg");
+
+            boardRepository.save(board);
+        }
 
     
 }

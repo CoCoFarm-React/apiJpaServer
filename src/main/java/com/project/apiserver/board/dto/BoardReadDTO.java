@@ -1,9 +1,6 @@
 package com.project.apiserver.board.dto;
 
 import java.time.LocalDateTime;
-import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -27,9 +24,9 @@ public class BoardReadDTO {
     private String email;
     private String nickname;
     private String catename;
-    // private List<MultipartFile> file;
-    
     private Integer cateno;
+
+    private Long mno;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regDate;
@@ -39,6 +36,8 @@ public class BoardReadDTO {
 
     private boolean delFlag;
 
-    private Long mno;
+    private String fname; //bi.fname에 해당하는 필드 추가
+
+    private Integer view;
     
 }

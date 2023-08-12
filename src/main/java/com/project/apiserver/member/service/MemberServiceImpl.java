@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.project.apiserver.common.FileUploader;
 import com.project.apiserver.member.dto.MemberAccountDTO;
 import com.project.apiserver.member.dto.MemberPageRequestDTO;
 import com.project.apiserver.member.dto.MemberPageResponseDTO;
@@ -23,6 +24,7 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository repository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
+    private final FileUploader fileUploader;
     // Read table one row
     @Override
     public MemberAccountDTO getOne(Long mno) {
@@ -61,9 +63,8 @@ public class MemberServiceImpl implements MemberService {
         MemberAccount member =  result.orElseThrow();
         
         member.delete();
-
+        fileUploader.removeProfile(member.getProfile());
         repository.save(member);
-        
     }
 
 
@@ -79,14 +80,20 @@ public class MemberServiceImpl implements MemberService {
         log.info("modify service1.......................");
 
         MemberAccount member =  result.orElseThrow();
-
+        String oldProfile = member.getProfile();
+        fileUploader.removeProfile(oldProfile);
         log.info("modify service.2......................");
+        fileUploader.uploadProfile(memberAccountDTO.getFile());
 
         member.changeNickname(memberAccountDTO.getNickname());
         member.changePw(passwordEncoder.encode(memberAccountDTO.getPw()));
         member.changeIntro(memberAccountDTO.getIntro());
         member.changeAddress(memberAccountDTO.getAddress());
+        member.changeProfile(fileUploader.uploadProfile(memberAccountDTO.getFile())!=null ?fileUploader.uploadProfile(memberAccountDTO.getFile()):"");
         member.changeSocialFalse();
+     
+
+
         log.info("modify service3 --------------");
         repository.save(member);
         
@@ -96,7 +103,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void registerMember(MemberAccountDTO accountDTO) {
 
-        
+        String profile =fileUploader.uploadProfile(accountDTO.getFile());
 
         MemberAccount account = MemberAccount.builder()
         .email(accountDTO.getEmail())
@@ -105,7 +112,10 @@ public class MemberServiceImpl implements MemberService {
         .intro(accountDTO.getIntro())
         .roleName(accountDTO.getRoleName())
         .address(accountDTO.getAddress())
+        .profile(profile !=null ? profile :"")
         .build();
+        
+   
 
         repository.save(account);
 

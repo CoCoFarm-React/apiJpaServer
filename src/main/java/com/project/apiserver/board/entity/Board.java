@@ -1,10 +1,16 @@
 package com.project.apiserver.board.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.project.apiserver.common.BaseEntity;
 import com.project.apiserver.common.Category;
 
 
 import com.project.apiserver.member.entity.MemberAccount;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +29,7 @@ import lombok.ToString;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"member","category"})
+@ToString(exclude = {"member","category", "images"})
 @Table(name = "tbl_board")
 public class Board extends BaseEntity {
     
@@ -40,6 +46,24 @@ public class Board extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
+    // ElementCollection은 종속적인 요소까지 함께 삭제 됨 (cascade 불필요)
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Builder.Default
+    private List<BoardImage> images = new ArrayList<>();
+
+    @Column(columnDefinition = "integer default 0")
+    private Integer view;
+
+    // 상품을 추가하는 method
+    public void addImage(String name) {
+
+        BoardImage bImage = BoardImage.builder().fname(name)
+                .ord(images.size()).build();
+
+        images.add(bImage);
+    }
+    
+
     public void changeDelFlag(boolean delFlag) {
         this.delFlag = delFlag;
     }
@@ -49,4 +73,5 @@ public class Board extends BaseEntity {
     public void changeContent(String content){
         this.content = content;
     }
+    
 }

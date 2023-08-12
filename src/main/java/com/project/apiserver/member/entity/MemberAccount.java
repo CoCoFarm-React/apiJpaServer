@@ -46,6 +46,8 @@ public class MemberAccount extends BaseEntity {
 
     // 0810 차은우 추가
     private String address;
+
+    private String profile;
     // Role 추가하는 메소드
     public void changeRole(MemberAccountRole role) {
         roleName = role.getRoleName();
@@ -73,6 +75,10 @@ public class MemberAccount extends BaseEntity {
 
     public void changeAddress(String address){
         this.address = address;
+    }
+    
+    public void changeProfile(String profile){
+        this.profile = profile;
     }
 
 
