@@ -36,7 +36,7 @@ public class BoardListDTO {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regDate;
 
-        @Builder.Default
+    @Builder.Default
     private List<String> images = new ArrayList<>();
 
     // 등록, 수정 업로드 된 파일 데이터를 수집하는 용도

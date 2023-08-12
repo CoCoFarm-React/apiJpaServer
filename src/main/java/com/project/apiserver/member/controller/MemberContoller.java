@@ -64,7 +64,6 @@ public class MemberContoller {
     @GetMapping("admin/read/{mno}")
     public MemberAccountDTO getOne(@PathVariable Long mno){
 
-
          return memberService.getOne(mno);
     }    
 
