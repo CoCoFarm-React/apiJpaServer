@@ -88,6 +88,5 @@ public class MemberContoller {
         return Map.of("result", "succeess");
 
     }
-
-
+    
 }
