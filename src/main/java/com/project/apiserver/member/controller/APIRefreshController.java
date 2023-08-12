@@ -61,7 +61,7 @@ public class APIRefreshController {
     long leftMin = gap / (1000 * 60);
 
     //1시간도 안남았는지.. 
-    return leftMin < 60;
+    return leftMin < 60;  
   }
 
   private boolean checkExpiredToken(String token) {
