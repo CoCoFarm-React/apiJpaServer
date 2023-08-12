@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -27,7 +28,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
     @Query("select new com.project.apiserver.productboard.dto.ProductReadDTO(" +
            "p.pno, p.delFlag, p.pdesc, p.pname, p.price, p.modDate, " +
            "m.mno, m.email, m.nickname, m.roleName, " +
-           "c.procateno, c.procatename, pi.fname) " +
+           "c.procateno, c.procatename, pi.fname, p.view) " +
            "from Product p " +
            "join p.member m " +
            "join p.category c " +
@@ -36,4 +37,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
            "order by p.pno desc")
     List<ProductReadDTO> selectOne(@Param("pno") Long pno);
 
+    @Modifying
+    @Query("update Product p set p.view= p.view +1 where p.pno = :pno")
+    int incrementView(@Param("pno") Long pno);
 }

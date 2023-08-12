@@ -97,7 +97,7 @@ public class MemberRepositoryTests {
     public void getOne(){
       
         MemberAccount one =  repository.getOne(6L);
-
+        
         log.info(one);
        
 

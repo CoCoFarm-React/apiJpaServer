@@ -89,7 +89,7 @@ public class MemberServiceImpl implements MemberService {
         member.changePw(passwordEncoder.encode(memberAccountDTO.getPw()));
         member.changeIntro(memberAccountDTO.getIntro());
         member.changeAddress(memberAccountDTO.getAddress());
-        member.changeProfile(fileUploader.uploadProfile(memberAccountDTO.getFile()));
+        member.changeProfile(fileUploader.uploadProfile(memberAccountDTO.getFile())!=null ?fileUploader.uploadProfile(memberAccountDTO.getFile()):"");
         member.changeSocialFalse();
      
 
@@ -112,7 +112,7 @@ public class MemberServiceImpl implements MemberService {
         .intro(accountDTO.getIntro())
         .roleName(accountDTO.getRoleName())
         .address(accountDTO.getAddress())
-        .profile(profile)
+        .profile(profile !=null ? profile :"")
         .build();
         
    

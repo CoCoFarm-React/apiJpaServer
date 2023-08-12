@@ -9,6 +9,7 @@ import com.project.apiserver.common.Category;
 
 import com.project.apiserver.member.entity.MemberAccount;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -49,6 +50,9 @@ public class Board extends BaseEntity {
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default
     private List<BoardImage> images = new ArrayList<>();
+
+    @Column(columnDefinition = "integer default 0")
+    private Integer view;
 
     // 상품을 추가하는 method
     public void addImage(String name) {

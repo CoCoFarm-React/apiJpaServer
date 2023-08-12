@@ -8,6 +8,7 @@ import com.project.apiserver.common.BaseEntity;
 import com.project.apiserver.common.ProductCategory;
 import com.project.apiserver.member.entity.MemberAccount;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -45,7 +46,8 @@ public class Product extends BaseEntity {
     // column이 되니 조심하게 만들어야 된다.
     // delFlag
     private boolean delFlag;
-
+    @Column(columnDefinition = "integer default 0")
+    private Integer view;
     // ElementCollection은 종속적인 요소까지 함께 삭제 됨 (cascade 불필요)
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default

@@ -92,7 +92,8 @@ public class ProductSearchImpl extends QuerydslRepositorySupport implements Prod
             member.roleName,
             category.procatename,
             category.procateno,
-            image.fname
+            image.fname,
+            product.view
         ));
 
         long totalCount = listQuery.fetchCount();

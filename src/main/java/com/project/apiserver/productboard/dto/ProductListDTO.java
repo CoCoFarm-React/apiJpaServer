@@ -44,4 +44,5 @@ public class ProductListDTO {
     @Builder.Default
     private List<MultipartFile> files = new ArrayList<>();
     
+    private Integer view;
 }
