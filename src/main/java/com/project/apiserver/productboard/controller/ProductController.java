@@ -16,6 +16,7 @@ import com.project.apiserver.common.FileUploader;
 import com.project.apiserver.common.PageRequestDTO;
 import com.project.apiserver.common.PageResponseDTO;
 import com.project.apiserver.productboard.dto.ProductDTO;
+import com.project.apiserver.productboard.dto.ProductListByMemberDTO;
 import com.project.apiserver.productboard.dto.ProductListDTO;
 import com.project.apiserver.productboard.dto.ProductReadDTO;
 import com.project.apiserver.productboard.service.ProductService;
@@ -86,6 +87,14 @@ public class ProductController {
         productService.modify(productDTO);
 
         return Map.of("result", "success");
+
+    }
+
+    // 멤버별 리스트 조회
+    @GetMapping("/list/{mno}")
+    public PageResponseDTO<ProductListByMemberDTO> getListByMno(@ParameterObject PageRequestDTO requestDTO, @PathVariable Long mno){
+
+        return productService.getListByMno(requestDTO, mno);
 
     }
 

@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.project.apiserver.productboard.dto.ProductListByMemberDTO;
+import com.project.apiserver.productboard.dto.ProductListDTO;
 import com.project.apiserver.productboard.dto.ProductReadDTO;
 import com.project.apiserver.productboard.entity.Product;
 import com.project.apiserver.productboard.repository.search.ProductSearch;
@@ -40,4 +42,12 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
     @Modifying
     @Query("update Product p set p.view= p.view +1 where p.pno = :pno")
     int incrementView(@Param("pno") Long pno);
+
+    // @EntityGraph(attributePaths = {"images"})
+    // @Query("select new com.project.apiserver.productboard.dto.ProductListByMemberDTO(" +
+    //         "p.pno, p.delFlag, p.pname, p.price, p.modDate, p.category.procateno, p.view, pi.fname) " +
+    //         "from Product p join p.images pi " + 
+    //         "where p.member.mno = :mno and pi.ord = 0")
+    // List<ProductListByMemberDTO> getListByMno(@Param("mno") Long mno);
+
 }

@@ -125,4 +125,14 @@ public class ProductRepositoryTests {
 
     }
 
+    // 멤버별 조회
+    @Test
+    public void selectByMno() {
+
+        PageRequestDTO dto = new PageRequestDTO(0, 10, null, null, null);
+
+        repository.searchWithMno(dto, 3L);
+
+    }
+
 }

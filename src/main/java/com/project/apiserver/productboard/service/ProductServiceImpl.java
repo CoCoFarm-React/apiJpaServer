@@ -13,6 +13,7 @@ import com.project.apiserver.common.PageResponseDTO;
 import com.project.apiserver.common.ProductCategory;
 import com.project.apiserver.member.entity.MemberAccount;
 import com.project.apiserver.productboard.dto.ProductDTO;
+import com.project.apiserver.productboard.dto.ProductListByMemberDTO;
 import com.project.apiserver.productboard.dto.ProductListDTO;
 import com.project.apiserver.productboard.dto.ProductReadDTO;
 import com.project.apiserver.productboard.entity.Product;
@@ -146,6 +147,13 @@ public class ProductServiceImpl implements ProductService {
         List<String> wantDeleteFiles = oldFileNames.stream().filter(f -> newFiles.indexOf(f) == -1).collect(Collectors.toList());
 
         fileUploader.removeFiles(wantDeleteFiles);
+
+    }
+
+    @Override
+    public PageResponseDTO<ProductListByMemberDTO> getListByMno(PageRequestDTO requestDTO, Long mno) {
+
+        return repository.searchWithMno(requestDTO, mno);
 
     }
     

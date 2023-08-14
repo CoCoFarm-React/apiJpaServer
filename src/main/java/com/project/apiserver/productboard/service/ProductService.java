@@ -1,9 +1,13 @@
 package com.project.apiserver.productboard.service;
 
 
+
+import java.util.List;
+
 import com.project.apiserver.common.PageRequestDTO;
 import com.project.apiserver.common.PageResponseDTO;
 import com.project.apiserver.productboard.dto.ProductDTO;
+import com.project.apiserver.productboard.dto.ProductListByMemberDTO;
 import com.project.apiserver.productboard.dto.ProductListDTO;
 import com.project.apiserver.productboard.dto.ProductReadDTO;
 
@@ -21,5 +25,7 @@ public interface ProductService {
     void delete(Long pno);
 
     void modify(ProductDTO productDTO);
+
+    PageResponseDTO<ProductListByMemberDTO> getListByMno(PageRequestDTO requestDTO, Long mno);
 
 }

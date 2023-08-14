@@ -110,4 +110,14 @@ public class ProductServiceTests {
 
     }
 
+    // 멤버별 리스트 조회
+    @Test
+    public void getListByMno(){
+
+        PageRequestDTO dto = new PageRequestDTO(0, 10);
+
+        log.info(productService.getListByMno(dto, 3L));
+
+    }
+
 }
