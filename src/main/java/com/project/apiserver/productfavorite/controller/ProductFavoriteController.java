@@ -1,5 +1,4 @@
-package com.project.apiserver.boardfavorite.controller;
-
+package com.project.apiserver.productfavorite.controller;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -8,48 +7,47 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.project.apiserver.boardfavorite.service.BoardFavoriteService;
 import com.project.apiserver.member.dto.MemberAccountDTO;
 import com.project.apiserver.member.service.MemberService;
+import com.project.apiserver.productfavorite.service.ProductFavoriteService;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/boardfavorite/")
+@RequestMapping("/api/productfavorite/")
 @RequiredArgsConstructor
-public class BoardFavoriteController {
+public class ProductFavoriteController {
 
-     private final MemberService memberService;
-     private final BoardFavoriteService bFavoriteService;
+    private final MemberService memberService;
+    private final ProductFavoriteService pFavoriteService;
 
-    @PostMapping("{bno}")
+
+    @PostMapping("{pno}")
     public Map<String, String> addSubscription(MemberAccountDTO account,
-            @PathVariable("bno") Long bno) {
+            @PathVariable("pno") Long pno) {
 
         MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
 
-        bFavoriteService.incrementFavorite(dto.getMno(), bno);
+        pFavoriteService.incrementFavorite(dto.getMno(), pno);
 
         return Map.of("result", "Success");
 
     }
 
-    @DeleteMapping("{bno}")
+    @DeleteMapping("{pno}")
     public Map<String, String> deleteSubscription(MemberAccountDTO account,
-            @PathVariable("bno") Long bno) {
+            @PathVariable("pno") Long pno) {
 
         MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
 
-        bFavoriteService.deleteFavorite(dto.getMno(), bno);
+        pFavoriteService.deleteFavorite(dto.getMno(), pno);
 
         return Map.of("result", "Success");
 
     }
     @GetMapping("{bno}")
-    public Long countSubscription(@PathVariable("bno") Long bno){
+    public Long countSubscription(@PathVariable("pno") Long pno){
 
-        return bFavoriteService.countFavorite(bno);
+        return pFavoriteService.countFavorite(pno);
     }
-    
 }
