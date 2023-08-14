@@ -53,7 +53,7 @@ public class MemberContoller {
 
     @PostMapping("member")
     public Map<String, String> registerMember( MemberAccountDTO memberAccountDTO){
-
+        log.info(memberAccountDTO);
         memberService.registerMember(memberAccountDTO);
 
         return Map.of("result", "succeess");

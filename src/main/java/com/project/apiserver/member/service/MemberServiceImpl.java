@@ -67,8 +67,6 @@ public class MemberServiceImpl implements MemberService {
         repository.save(member);
     }
 
-
-
     @Override
     public void modifyMember(MemberAccountDTO memberAccountDTO) {
 
@@ -91,8 +89,6 @@ public class MemberServiceImpl implements MemberService {
         member.changeAddress(memberAccountDTO.getAddress());
         member.changeProfile(fileUploader.uploadProfile(memberAccountDTO.getFile())!=null ?fileUploader.uploadProfile(memberAccountDTO.getFile()):"");
         member.changeSocialFalse();
-     
-
 
         log.info("modify service3 --------------");
         repository.save(member);
