@@ -39,10 +39,11 @@ public class ProductListDTO {
     private String procatename;
 
     private String fname;
+    private Integer view;
 
     // 등록, 수정 업로드 된 파일 데이터를 수집하는 용도
     @Builder.Default
     private List<MultipartFile> files = new ArrayList<>();
     
-    private Integer view;
+
 }

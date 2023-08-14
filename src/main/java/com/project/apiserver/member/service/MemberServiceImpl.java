@@ -121,5 +121,13 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+
+    @Override
+    public MemberAccountDTO getInfoByEmail(String email) {
+        MemberAccount entity = repository.getInfoEmail(email);
+
+        return modelMapper.map(entity, MemberAccountDTO.class);
+    }
+
    
 }

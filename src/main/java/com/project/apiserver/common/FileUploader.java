@@ -92,7 +92,7 @@ public class FileUploader {
 
     }
     public String uploadProfile(MultipartFile profile){
-        if( profile==null ||profile.getSize()==0) throw new UploadException("No File");
+        if( profile==null ||profile.getSize()==0) return "";
 
         String orginal = profile.getOriginalFilename();
         String uuid = UUID.randomUUID().toString();

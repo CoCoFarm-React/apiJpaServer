@@ -20,6 +20,7 @@ public interface MemberService {
     void modifyMember(MemberAccountDTO memberAccountDTO);
 
 
+    MemberAccountDTO getInfoByEmail(String email);
 }
 
 

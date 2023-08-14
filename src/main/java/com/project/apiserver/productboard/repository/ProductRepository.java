@@ -12,6 +12,8 @@ import com.project.apiserver.productboard.dto.ProductReadDTO;
 import com.project.apiserver.productboard.entity.Product;
 import com.project.apiserver.productboard.repository.search.ProductSearch;
 
+import jakarta.transaction.Transactional;
+
 
 
 public interface ProductRepository extends JpaRepository<Product, Long>, ProductSearch {
@@ -37,6 +39,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
            "order by p.pno desc")
     List<ProductReadDTO> selectOne(@Param("pno") Long pno);
 
+    @Transactional
     @Modifying
     @Query("update Product p set p.view= p.view +1 where p.pno = :pno")
     int incrementView(@Param("pno") Long pno);
