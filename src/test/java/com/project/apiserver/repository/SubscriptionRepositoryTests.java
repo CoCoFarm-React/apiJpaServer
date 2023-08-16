@@ -32,6 +32,12 @@ public class SubscriptionRepositoryTests {
             }
         }
     }
+    @Test
+    public void insetsub(){
+        MemberAccount toAccount = MemberAccount.builder().mno(479L).build();
+        MemberAccount fromAccount = MemberAccount.builder().mno(4L).build();
+        subRepository.insertSubscriptionNative(fromAccount.getMno(), toAccount.getMno());
+    }
 
     @Test
     public void deldeSubTest(){
