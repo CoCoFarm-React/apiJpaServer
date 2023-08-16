@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.apiserver.common.PageRequestDTO;
+import com.project.apiserver.common.PageResponseDTO;
 import com.project.apiserver.member.dto.MemberAccountDTO;
 import com.project.apiserver.member.service.MemberService;
 import com.project.apiserver.subscription.service.SubscriptionService;
@@ -54,6 +56,11 @@ public class SubscriptionController {
     public Long countSubscription(@PathVariable("tomno") Long tomno){
 
         return subService.countSub(tomno);
+    }
+    @GetMapping("{frommno}/list")
+    public PageResponseDTO<MemberAccountDTO> getListFrom(@PathVariable("frommno") Long frommno, PageRequestDTO pageRequestDTO){
+
+        return subService.getListfrom(frommno, pageRequestDTO);
     }
 
 }
