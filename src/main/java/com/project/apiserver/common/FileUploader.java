@@ -56,8 +56,9 @@ public class FileUploader {
     // 파일 업로드
     public List<String> uploadFiles(List<MultipartFile> files, boolean makeThumb) {
 
-        // 파일이 없을 시 Exception
-        if(files == null || files.size() == 0) throw new UploadException("No File");
+        if(files == null || files.size() == 0) {
+            return new ArrayList<>();
+        }
 
         List<String> uploadFileNames = new ArrayList<>();
 
