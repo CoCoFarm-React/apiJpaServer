@@ -24,7 +24,7 @@ public class BoardFavoriteController {
      private final BoardFavoriteService bFavoriteService;
 
     @PostMapping("{bno}")
-    public Map<String, String> addSubscription(MemberAccountDTO account,
+    public Map<String, String> addFavorite(MemberAccountDTO account,
             @PathVariable("bno") Long bno) {
 
         MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
@@ -36,7 +36,7 @@ public class BoardFavoriteController {
     }
 
     @DeleteMapping("{bno}")
-    public Map<String, String> deleteSubscription(MemberAccountDTO account,
+    public Map<String, String> deleteFavorite(MemberAccountDTO account,
             @PathVariable("bno") Long bno) {
 
         MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
@@ -47,12 +47,12 @@ public class BoardFavoriteController {
 
     }
     @GetMapping("{bno}")
-    public Long countSubscription(@PathVariable("bno") Long bno){
+    public Long countFavorite(@PathVariable("bno") Long bno){
 
         return bFavoriteService.countFavorite(bno);
     }
     @GetMapping("{bno}/check")
-    public Long checkfavorite(MemberAccountDTO account,
+    public Long checkFavorite(MemberAccountDTO account,
             @PathVariable("bno") Long bno) {
 
         MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
