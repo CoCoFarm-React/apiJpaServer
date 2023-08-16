@@ -35,7 +35,7 @@ public class MemberContoller {
     public MemberPageResponseDTO<MemberAccountDTO> getFarmerList(@ParameterObject MemberPageRequestDTO memberPageRequestDTO){
         log.info("test");
         memberPageRequestDTO.setRoleName("FARMER"); 
-        
+        log.info("-----------------------------------------");
         return memberService.getMemberList(memberPageRequestDTO);
 
     }

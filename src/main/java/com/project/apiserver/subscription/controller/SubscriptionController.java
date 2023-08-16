@@ -62,5 +62,16 @@ public class SubscriptionController {
 
         return subService.getListfrom(frommno, pageRequestDTO);
     }
+    @GetMapping("{tomno}/check")
+    public Long check(MemberAccountDTO fromAccount,
+            @PathVariable("tomno") Long tomno) {
 
+        MemberAccountDTO dto = memberService.getInfoByEmail(fromAccount.getEmail());
+
+       
+        return subService.checkSub(dto.getMno(), tomno);
+
+       
+
+    }
 }

@@ -47,7 +47,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberPageResponseDTO<MemberAccountDTO> getMemberList(MemberPageRequestDTO memberPageRequestDTO) {
 
-
+        log.info("----------------------2");
 
         return repository.search(memberPageRequestDTO);
 

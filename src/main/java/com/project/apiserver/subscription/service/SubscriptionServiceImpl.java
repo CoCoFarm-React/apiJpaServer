@@ -58,5 +58,11 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
         return new PageResponseDTO<>(dtoList, totalCount, pageRequestDTO);
     }
+
+    @Override
+    public Long checkSub(Long fromUser, Long toUser) {
+       
+        return subRepository.checkSub(fromUser, toUser);
+    }
     
 }

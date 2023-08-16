@@ -26,5 +26,11 @@ public class ProductFavoriteServiceImpl implements ProductFavoriteService{
         
         return pFavoriteRepository.countFavorite(pno);
     }
+
+    @Override
+    public Long checkFavorite(Long pno, Long mno) {
+        
+        return pFavoriteRepository.checkFavorite(pno, mno);
+    }
     
 }

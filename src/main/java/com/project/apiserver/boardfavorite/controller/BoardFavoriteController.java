@@ -51,5 +51,13 @@ public class BoardFavoriteController {
 
         return bFavoriteService.countFavorite(bno);
     }
+    @GetMapping("{bno}/check")
+    public Long checkfavorite(MemberAccountDTO account,
+            @PathVariable("bno") Long bno) {
+
+        MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
+
+        return bFavoriteService.checkFavorite(bno, dto.getMno());
+    }
     
 }

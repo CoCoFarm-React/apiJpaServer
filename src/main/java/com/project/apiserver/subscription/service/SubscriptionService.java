@@ -14,4 +14,5 @@ public interface SubscriptionService {
     void deleteSub(Long fromUser, Long toUser);
     Long countSub(Long toUser);
     PageResponseDTO<MemberAccountDTO> getListfrom(Long mno, PageRequestDTO pageRequestDTO);
+    Long checkSub(Long fromUser, Long toUser);
 }

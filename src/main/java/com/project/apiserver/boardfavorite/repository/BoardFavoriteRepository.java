@@ -24,5 +24,7 @@ public interface BoardFavoriteRepository extends JpaRepository<BoardFavorite, Lo
 
     @Query(value = "SELECT  COUNT(b) FROM BoardFavorite b WHERE b.board.bno = :bno GROUP BY b.board.bno")
     Long countSub(@Param("bno") Long bno);
-    
+
+    @Query(value = "SELECT count(*) from tbl_board_favorite where board_bno = :bno and member_mno = :mno", nativeQuery = true)
+    Long checkFavorite(@Param("bno") Long bno, @Param("mno") Long mno);
 }

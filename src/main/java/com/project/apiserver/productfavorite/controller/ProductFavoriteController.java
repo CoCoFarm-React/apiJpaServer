@@ -1,4 +1,5 @@
 package com.project.apiserver.productfavorite.controller;
+
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,9 +22,8 @@ public class ProductFavoriteController {
     private final MemberService memberService;
     private final ProductFavoriteService pFavoriteService;
 
-
     @PostMapping("{pno}")
-    public Map<String, String> addSubscription(MemberAccountDTO account,
+    public Map<String, String> addfavorite(MemberAccountDTO account,
             @PathVariable("pno") Long pno) {
 
         MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
@@ -35,7 +35,7 @@ public class ProductFavoriteController {
     }
 
     @DeleteMapping("{pno}")
-    public Map<String, String> deleteSubscription(MemberAccountDTO account,
+    public Map<String, String> deletefavorite(MemberAccountDTO account,
             @PathVariable("pno") Long pno) {
 
         MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
@@ -45,9 +45,19 @@ public class ProductFavoriteController {
         return Map.of("result", "Success");
 
     }
-    @GetMapping("{bno}")
-    public Long countSubscription(@PathVariable("pno") Long pno){
+
+    @GetMapping("{pno}")
+    public Long countfavorite(@PathVariable("pno") Long pno) {
 
         return pFavoriteService.countFavorite(pno);
+    }
+
+    @GetMapping("{pno}/check")
+    public Long checkfavorite(MemberAccountDTO account,
+            @PathVariable("pno") Long pno) {
+
+        MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
+
+        return pFavoriteService.checkFavorite(pno, dto.getMno());
     }
 }

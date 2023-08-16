@@ -32,4 +32,7 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
 
     @Query(value = "SELECT s.toAccount FROM Subscription s WHERE s.fromAccount.mno = :mno ")
     Page<MemberAccount> getListSubfrom(@Param("mno") Long mno, Pageable pageable);
+    
+    @Query(value = "SELECT count(*) from tbl_subscription where from_account_mno = :frommno and to_account_mno = :tomno", nativeQuery = true)
+    Long checkSub(@Param("frommno") Long frommno, @Param("tomno") Long tomno);
 }
