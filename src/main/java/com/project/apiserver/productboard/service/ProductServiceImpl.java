@@ -152,15 +152,12 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
-<<<<<<< HEAD
     @Override
     public PageResponseDTO<ProductListByMemberDTO> getListByMno(PageRequestDTO requestDTO, Long mno) {
 
         return repository.searchWithMno(requestDTO, mno);
 
     }
-=======
->>>>>>> 9db7f46286aeb9f8df9b1d5e03b6fbff2e950bcd
     
 
 }
