@@ -97,7 +97,7 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override
-    public void registerMember(MemberAccountDTO accountDTO) {
+    public Long registerMember(MemberAccountDTO accountDTO) {
 
         String profile =fileUploader.uploadProfile(accountDTO.getFile());
 
@@ -112,8 +112,7 @@ public class MemberServiceImpl implements MemberService {
         .build();
         
    
-
-        repository.save(account);
+        return repository.save(account).getMno();
 
     }
 

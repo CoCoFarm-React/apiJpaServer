@@ -36,6 +36,7 @@ public class BoardController {
     public BoardReadDTO getOne(@PathVariable("bno") Long bno) {
         log.info("----------------------------------");
         log.info(bno);
+
         return boardService.getOne(bno);
     }
 

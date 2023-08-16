@@ -41,7 +41,7 @@ public interface BoardRepository extends JpaRepository<Board, Long>, BoardSearch
            "from Board b " +
            "join b.member m " +
            "join b.category c " +
-           "join b.images bi " +
+           "left outer join b.images bi " +
            "where b.bno = :bno and b.delFlag = false " +
            "order by b.bno desc")
     List<BoardReadDTO> selectOne(@Param("bno") Long bno);

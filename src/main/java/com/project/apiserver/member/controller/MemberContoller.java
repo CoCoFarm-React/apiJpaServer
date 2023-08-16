@@ -52,11 +52,13 @@ public class MemberContoller {
 
 
     @PostMapping("member")
-    public Map<String, String> registerMember( MemberAccountDTO memberAccountDTO){
+    public Map<String, Long> registerMember( MemberAccountDTO memberAccountDTO){
         log.info(memberAccountDTO);
-        memberService.registerMember(memberAccountDTO);
 
-        return Map.of("result", "succeess");
+
+        Long returnNum = memberService.registerMember(memberAccountDTO);
+
+        return Map.of("result", returnNum);
 
     }
 

@@ -49,8 +49,8 @@ public class OAuthAPILoginSuccessHandler implements AuthenticationSuccessHandler
     String jsonStr = gson.toJson(claims);
     // URL에 적용가능한 무자열로 변환 redirect는 get방식만 되기떄문에
     String encodeStr = URLEncoder.encode(jsonStr, "UTF-8");
- 
-     response.sendRedirect("http://localhost:3000/member/loginhandler?data="+encodeStr);
+      
+    response.sendRedirect("http://localhost:3000/member/loginhandler?data="+encodeStr);
  
   }
  

@@ -34,7 +34,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
            "from Product p " +
            "join p.member m " +
            "join p.category c " +
-           "join p.images pi " +
+           "left outer join p.images pi " +
            "where p.delFlag = false and p.pno = :pno " +
            "order by p.pno desc")
     List<ProductReadDTO> selectOne(@Param("pno") Long pno);
