@@ -2,7 +2,6 @@ package com.project.apiserver.subscription.controller;
 
 import java.util.Map;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +17,6 @@ import com.project.apiserver.subscription.service.SubscriptionService;
 
 import lombok.RequiredArgsConstructor;
 
-
-@Controller
 @RestController
 @RequestMapping("/api/sub/")
 @RequiredArgsConstructor
