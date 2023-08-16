@@ -2,7 +2,6 @@ package com.project.apiserver.reply.controller;
 
 import java.util.Map;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +24,6 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RequiredArgsConstructor
 @RequestMapping("/api/replies/")
-@CrossOrigin
 public class ReplyController {
 
     private final ReplyService replyService;
