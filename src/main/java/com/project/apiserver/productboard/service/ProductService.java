@@ -26,6 +26,9 @@ public interface ProductService {
 
     void modify(ProductDTO productDTO);
 
+<<<<<<< HEAD
     PageResponseDTO<ProductListByMemberDTO> getListByMno(PageRequestDTO requestDTO, Long mno);
+=======
+>>>>>>> 9db7f46286aeb9f8df9b1d5e03b6fbff2e950bcd
 
 }

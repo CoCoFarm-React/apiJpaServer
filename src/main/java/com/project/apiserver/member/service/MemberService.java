@@ -13,13 +13,14 @@ public interface MemberService {
 
     MemberAccountDTO getOne(Long mno);
 
-    void registerMember(MemberAccountDTO accountDTO);
+    Long registerMember(MemberAccountDTO accountDTO);
 
     void deleteMember(Long mno);
 
     void modifyMember(MemberAccountDTO memberAccountDTO);
 
 
+    MemberAccountDTO getInfoByEmail(String email);
 }
 
 

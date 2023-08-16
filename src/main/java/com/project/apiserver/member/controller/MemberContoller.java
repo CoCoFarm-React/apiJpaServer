@@ -4,7 +4,6 @@ package com.project.apiserver.member.controller;
 import java.util.Map;
 
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +23,6 @@ import lombok.extern.log4j.Log4j2;
 @RestController
 @RequestMapping("/api/")
 @RequiredArgsConstructor
-@CrossOrigin
 @Log4j2
 public class MemberContoller {
 
@@ -52,11 +50,12 @@ public class MemberContoller {
 
 
     @PostMapping("member")
-    public Map<String, String> registerMember( MemberAccountDTO memberAccountDTO){
+    public Map<String, Long> registerMember( MemberAccountDTO memberAccountDTO){
+        log.info(memberAccountDTO);
 
-        memberService.registerMember(memberAccountDTO);
+        Long returnNum = memberService.registerMember(memberAccountDTO);
 
-        return Map.of("result", "succeess");
+        return Map.of("result", returnNum);
 
     }
 

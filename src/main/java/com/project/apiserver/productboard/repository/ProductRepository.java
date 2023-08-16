@@ -14,6 +14,8 @@ import com.project.apiserver.productboard.dto.ProductReadDTO;
 import com.project.apiserver.productboard.entity.Product;
 import com.project.apiserver.productboard.repository.search.ProductSearch;
 
+import jakarta.transaction.Transactional;
+
 
 
 public interface ProductRepository extends JpaRepository<Product, Long>, ProductSearch {
@@ -34,11 +36,12 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
            "from Product p " +
            "join p.member m " +
            "join p.category c " +
-           "join p.images pi " +
+           "left outer join p.images pi " +
            "where p.delFlag = false and p.pno = :pno " +
            "order by p.pno desc")
     List<ProductReadDTO> selectOne(@Param("pno") Long pno);
 
+    @Transactional
     @Modifying
     @Query("update Product p set p.view= p.view +1 where p.pno = :pno")
     int incrementView(@Param("pno") Long pno);

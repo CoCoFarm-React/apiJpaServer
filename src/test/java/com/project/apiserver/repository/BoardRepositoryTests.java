@@ -115,6 +115,12 @@ public class BoardRepositoryTests {
        log.info(data);
 
     }
+    @Test
+    public void checkView(){
+        log.info("1234544444444444444");
+        boardRepository.incrementView(11L);
+        log.info("SSSSSSSSSSSSSSSSSSS");
+    }
 
     @Test
     public void addDummy(){

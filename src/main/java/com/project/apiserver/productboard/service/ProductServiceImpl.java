@@ -49,8 +49,9 @@ public class ProductServiceImpl implements ProductService {
     // 조회
     @Override
     public ProductReadDTO readOne(Long pno) {
-
+        log.info("--------------------");
         repository.incrementView(pno);
+        log.info("1234444444");
         List<ProductReadDTO> list = repository.selectOne(pno);
         
         ProductReadDTO dto = ProductReadDTO
@@ -68,6 +69,7 @@ public class ProductServiceImpl implements ProductService {
         .roleName(list.get(0).getRoleName())
         .procatename(list.get(0).getProcatename())
         .procateno(list.get(0).getProcateno())
+        .view(list.get(0).getView())
         .build();
 
         log.info("-------------------------------");
@@ -150,12 +152,15 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+<<<<<<< HEAD
     @Override
     public PageResponseDTO<ProductListByMemberDTO> getListByMno(PageRequestDTO requestDTO, Long mno) {
 
         return repository.searchWithMno(requestDTO, mno);
 
     }
+=======
+>>>>>>> 9db7f46286aeb9f8df9b1d5e03b6fbff2e950bcd
     
 
 }

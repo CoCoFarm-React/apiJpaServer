@@ -67,8 +67,6 @@ public class MemberServiceImpl implements MemberService {
         repository.save(member);
     }
 
-
-
     @Override
     public void modifyMember(MemberAccountDTO memberAccountDTO) {
 
@@ -91,8 +89,6 @@ public class MemberServiceImpl implements MemberService {
         member.changeAddress(memberAccountDTO.getAddress());
         member.changeProfile(fileUploader.uploadProfile(memberAccountDTO.getFile())!=null ?fileUploader.uploadProfile(memberAccountDTO.getFile()):"");
         member.changeSocialFalse();
-     
-
 
         log.info("modify service3 --------------");
         repository.save(member);
@@ -101,7 +97,7 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override
-    public void registerMember(MemberAccountDTO accountDTO) {
+    public Long registerMember(MemberAccountDTO accountDTO) {
 
         String profile =fileUploader.uploadProfile(accountDTO.getFile());
 
@@ -116,9 +112,16 @@ public class MemberServiceImpl implements MemberService {
         .build();
         
    
+        return repository.save(account).getMno();
 
-        repository.save(account);
+    }
 
+
+    @Override
+    public MemberAccountDTO getInfoByEmail(String email) {
+        MemberAccount entity = repository.getInfoEmail(email);
+
+        return modelMapper.map(entity, MemberAccountDTO.class);
     }
 
    

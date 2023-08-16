@@ -3,7 +3,6 @@ package com.project.apiserver.board.controller;
 import java.util.Map;
 
 import org.springdoc.core.annotations.ParameterObject;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +24,7 @@ import lombok.extern.log4j.Log4j2;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/board/")
-@CrossOrigin
+
 @Log4j2
 public class BoardController {
 
@@ -36,6 +35,7 @@ public class BoardController {
     public BoardReadDTO getOne(@PathVariable("bno") Long bno) {
         log.info("----------------------------------");
         log.info(bno);
+
         return boardService.getOne(bno);
     }
 

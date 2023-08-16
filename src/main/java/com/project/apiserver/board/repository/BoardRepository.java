@@ -15,6 +15,8 @@ import com.project.apiserver.board.dto.BoardReadDTO;
 import com.project.apiserver.board.entity.Board;
 import com.project.apiserver.board.repository.search.BoardSearch;
 
+import jakarta.transaction.Transactional;
+
 public interface BoardRepository extends JpaRepository<Board, Long>, BoardSearch {
 
     //Long bno, String title, String email, String nickname, String catename, Long rcnt,
@@ -39,13 +41,13 @@ public interface BoardRepository extends JpaRepository<Board, Long>, BoardSearch
            "from Board b " +
            "join b.member m " +
            "join b.category c " +
-           "join b.images bi " +
+           "left outer join b.images bi " +
            "where b.bno = :bno and b.delFlag = false " +
            "order by b.bno desc")
     List<BoardReadDTO> selectOne(@Param("bno") Long bno);
 
 
-
+    @Transactional
     @Modifying
     @Query("update Board b set b.view= b.view +1 where b.bno = :bno")
     int incrementView(@Param("bno") Long bno);
