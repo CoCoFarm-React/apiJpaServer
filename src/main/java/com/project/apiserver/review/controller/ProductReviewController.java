@@ -36,6 +36,8 @@ public class ProductReviewController {
     @GetMapping("/{pno}/list")
     public PageResponseDTO<ProductReviewDTO> getList(@PathVariable Long pno, ProductReviewPageRequestDTO dto){
 
+        log.info("list controllerrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+
         PageResponseDTO<ProductReviewDTO> result = service.getList(dto);
         log.info(result);
 
