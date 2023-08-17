@@ -64,5 +64,8 @@ public class Reply extends BaseEntity {
     public void setGno(Long gno){
         this.gno = gno;
     }
+    public void changeOrd(Boolean ord){
+        this.ord = ord;
+    }
 
 }
