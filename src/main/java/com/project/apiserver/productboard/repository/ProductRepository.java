@@ -30,7 +30,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
     @Query("select new com.project.apiserver.productboard.dto.ProductReadDTO(" +
            "p.pno, p.delFlag, p.pdesc, p.pname, p.price, p.modDate, " +
            "m.mno, m.email, m.nickname, m.roleName, " +
-           "c.procateno, c.procatename, pi.fname, p.view) " +
+           "c.procateno, c.procatename, pi.fname, p.view, p.regDate) " +
            "from Product p " +
            "join p.member m " +
            "join p.category c " +
