@@ -72,7 +72,7 @@ public class ReplyServiceImpl extends Exception implements ReplyService{
     }
 
     @Override
-    public void registReply(ReplyDTO replyDTO) {
+    public Long registReply(ReplyDTO replyDTO) {
 
         log.info("==========33333==============");
 
@@ -100,13 +100,15 @@ public class ReplyServiceImpl extends Exception implements ReplyService{
             reply.setGno(reply.getRno());
             replyRepository.save(reply);
         }
+        replyDTO.setRno(reply.getRno());
        
+        return replyDTO.getRno();
 
     }
 
     // 댓글 삭제
     @Override
-    public void deleteReply(Long rno) {
+    public Long deleteReply(Long rno) {
 
         Optional<Reply> result = replyRepository.findById(rno);
 
@@ -118,11 +120,13 @@ public class ReplyServiceImpl extends Exception implements ReplyService{
 
         replyRepository.save(reply);
 
+        return rno;
+
     }
 
     // 댓글 수정
     @Override
-    public void modifyReply(ReplyDTO replyDTO) {
+    public Long modifyReply(ReplyDTO replyDTO) {
 
         Optional<Reply> result = replyRepository.findById(replyDTO.getRno());
 
@@ -138,6 +142,8 @@ public class ReplyServiceImpl extends Exception implements ReplyService{
         reply.changeReply(replyDTO.getReply());
         
         replyRepository.save(reply);
+
+        return replyDTO.getRno();
 
     }
 
