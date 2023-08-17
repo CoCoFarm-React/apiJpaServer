@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.apiserver.common.PageRequestDTO;
@@ -16,11 +17,12 @@ import com.project.apiserver.member.service.MemberService;
 import com.project.apiserver.subscription.service.SubscriptionService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @RestController
 @RequestMapping("/api/sub/")
 @RequiredArgsConstructor
-
+@Log4j2
 public class SubscriptionController {
 
     private final MemberService memberService;
@@ -30,6 +32,13 @@ public class SubscriptionController {
     public Map<String, String> addSubscription(MemberAccountDTO fromAccount,
             @PathVariable("tomno") Long tomno) {
 
+                log.info("--------------------addSubscription-------------------------------");
+                log.info(fromAccount);
+                log.info(tomno);
+                log.info("----------------------addSubscription-----------------------------");
+
+        log.info("addSubscriptioaddSubscriptioaddSubscriptioaddSubscriptioaddSubscriptioaddSubscriptioaddSubscription");
+
         MemberAccountDTO dto = memberService.getInfoByEmail(fromAccount.getEmail());
 
         subService.incrementSub(dto.getMno(), tomno);
@@ -38,11 +47,17 @@ public class SubscriptionController {
 
     }
 
-    @DeleteMapping("{tomno}")
-    public Map<String, String> deleteSubscription(MemberAccountDTO fromAccount,
+    @DeleteMapping("{tomno}/{email}")
+    public Map<String, String> deleteSubscription(@PathVariable("email") String fromAccount,
             @PathVariable("tomno") Long tomno) {
 
-        MemberAccountDTO dto = memberService.getInfoByEmail(fromAccount.getEmail());
+                log.info("----------------------deleteSubscription-----------------------------");
+                log.info(fromAccount);
+                log.info(tomno);
+                log.info("------------------------deleteSubscription---------------------------");
+                
+
+        MemberAccountDTO dto = memberService.getInfoByEmail(fromAccount);
 
         subService.deleteSub(dto.getMno(), tomno);
 
@@ -61,10 +76,14 @@ public class SubscriptionController {
     }
     @GetMapping("{tomno}/check")
     public Long check(MemberAccountDTO fromAccount,
-            @PathVariable("tomno") Long tomno) {
+                      @PathVariable("tomno") Long tomno) {
+
+        log.info(tomno);
+        log.info(fromAccount);
+        log.info("fromAccount=======================================================================================");
+        
 
         MemberAccountDTO dto = memberService.getInfoByEmail(fromAccount.getEmail());
-
        
         return subService.checkSub(dto.getMno(), tomno);
 

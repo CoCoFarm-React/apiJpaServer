@@ -23,10 +23,10 @@ public class ProductFavoriteController {
     private final ProductFavoriteService pFavoriteService;
 
     @PostMapping("{pno}")
-    public Map<String, String> addfavorite(MemberAccountDTO account,
+    public Map<String, String> addfavorite(String account,
             @PathVariable("pno") Long pno) {
 
-        MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
+        MemberAccountDTO dto = memberService.getInfoByEmail(account);
 
         pFavoriteService.incrementFavorite(dto.getMno(), pno);
 
@@ -34,11 +34,11 @@ public class ProductFavoriteController {
 
     }
 
-    @DeleteMapping("{pno}")
-    public Map<String, String> deletefavorite(MemberAccountDTO account,
+    @DeleteMapping("{pno}/{email}")
+    public Map<String, String> deletefavorite(@PathVariable("email") String account,
             @PathVariable("pno") Long pno) {
 
-        MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
+        MemberAccountDTO dto = memberService.getInfoByEmail(account);
 
         pFavoriteService.deleteFavorite(dto.getMno(), pno);
 

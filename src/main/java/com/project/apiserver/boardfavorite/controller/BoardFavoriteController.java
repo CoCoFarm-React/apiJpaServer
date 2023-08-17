@@ -35,11 +35,11 @@ public class BoardFavoriteController {
 
     }
 
-    @DeleteMapping("{bno}")
-    public Map<String, String> deleteFavorite(MemberAccountDTO account,
+    @DeleteMapping("{bno}/{email}")
+    public Map<String, String> deleteFavorite(@PathVariable("email") String account,
             @PathVariable("bno") Long bno) {
 
-        MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
+        MemberAccountDTO dto = memberService.getInfoByEmail(account);
 
         bFavoriteService.deleteFavorite(dto.getMno(), bno);
 
