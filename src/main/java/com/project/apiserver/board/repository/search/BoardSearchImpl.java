@@ -52,6 +52,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
         log.info("--------------------------------------2");
 
         searchQuery.where(qBoard.category.cateno.eq(cateno1));
+        searchQuery.where(qBoard.delFlag.eq(Boolean.FALSE));
 
         log.info("-------------------------------------3");
         if (keyword != null && searchType != null) {
@@ -123,6 +124,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
 
         searchQuery.where(qBoard.category.cateno.eq(cateno1));
         searchQuery.where(qBoard.member.mno.eq(mno));
+        searchQuery.where(qBoard.delFlag.eq(Boolean.FALSE));
 
         log.info("-------------------------------------3");
         if (keyword != null && searchType != null) {

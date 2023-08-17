@@ -11,11 +11,11 @@ public interface ReplyService {
 
     PageResponseDTO<ReplyDTO> getReplyList(ReplyPageRequestDTO requestDTO);
 
-    void registReply(ReplyDTO replyDTO);
+    Long registReply(ReplyDTO replyDTO);
 
-    void deleteReply(Long rno);
+    Long deleteReply(Long rno);
 
-    void modifyReply(ReplyDTO replyDTO);
+    Long modifyReply(ReplyDTO replyDTO);
 
     ReplyDTO readOneReply(Long rno);
 

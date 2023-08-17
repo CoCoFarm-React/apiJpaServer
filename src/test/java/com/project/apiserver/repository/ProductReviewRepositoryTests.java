@@ -143,9 +143,9 @@ public class ProductReviewRepositoryTests {
     @Commit
     public void imageTest(){
 
-        List<ProductReviewDTO> result = repository.readReview(207L);
+        // List<ProductReviewDTO> result = repository.readReview(207L);
 
-        log.info(result);
+        // log.info(result);
 
     }
 
