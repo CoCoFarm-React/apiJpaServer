@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.apiserver.board.dto.BoardDTO;
 import com.project.apiserver.board.dto.BoardListDTO;
 import com.project.apiserver.board.dto.BoardReadDTO;
 import com.project.apiserver.board.service.BoardService;
@@ -64,13 +65,13 @@ public class BoardController {
 
     // 게시글 등록
     @PostMapping("")
-    public Map<String, Long> registBoard(BoardReadDTO boardReadDTO) {
+    public Map<String, Long> registBoard(BoardDTO boardDTO) {
         log.info("testsdasdasdadasdsadasdadsa");
-        log.info(boardReadDTO);
-        boardService.registBoard(boardReadDTO);
-        log.info(boardReadDTO);
+        log.info(boardDTO);
+        boardService.registBoard(boardDTO);
+        log.info(boardDTO);
 
-        return Map.of("result", boardReadDTO.getBno());
+        return Map.of("result", boardDTO.getBno());
     }
 
     // 게시글 삭제
@@ -84,10 +85,10 @@ public class BoardController {
 
     // 게시글 수정
     @PutMapping("")
-    public Map<String, Long> modifyBoard(BoardReadDTO boardReadDTO) {
+    public Map<String, Long> modifyBoard(BoardDTO boardDTO) {
 
-        boardService.modifyBoard(boardReadDTO);
+        boardService.modifyBoard(boardDTO);
 
-        return Map.of("result", boardReadDTO.getBno());
+        return Map.of("result", boardDTO.getBno());
     }
 }

@@ -137,6 +137,21 @@ public class BoardRepositoryTests {
             boardRepository.save(board);
         }
     }
+    @Test
+    public void addTestWithFile(){
+        Category category = Category.builder().cateno(4).build();
+        MemberAccount memberAccountTest = MemberAccount.builder().mno(480L).build(); 
+
+        Board board = Board.builder()
+        .category(category)
+        .member(memberAccountTest)
+        .title("자유게시판글")
+        .content("자유게시글~~")
+        .view(0)
+        .build();
+        board.addImage(UUID.randomUUID().toString()+"aaa.jpg");
+        boardRepository.save(board);
+    }
 
     // song
     // 등록

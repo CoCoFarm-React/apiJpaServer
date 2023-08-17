@@ -1,10 +1,14 @@
 package com.project.apiserver.service;// package com.project.apiserver.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.project.apiserver.board.dto.BoardReadDTO;
+import com.project.apiserver.board.dto.BoardDTO;
 import com.project.apiserver.board.service.BoardService;
 import com.project.apiserver.common.PageRequestDTO;
 
@@ -58,16 +62,20 @@ public class BoardServiceTests {
     @Test
     public void insertBoardTest(){
 
-        BoardReadDTO boardReadDTO = BoardReadDTO
-        .builder()
-        .title("servicetest")
-        .content("Service testsssss")
-        .email("aaa499@email.com")
-        .mno(500L)
-        .cateno(1)
+                List<String> images = new ArrayList<>();
+
+        images.add(UUID.randomUUID().toString() + "_aaa.jpg");
+        images.add(UUID.randomUUID().toString() + "_bbb.jpg");
+        images.add(UUID.randomUUID().toString() + "_ccc.jpg");
+
+        BoardDTO boardDTO = BoardDTO.builder()
+        .cateno(4)
+        .mno(8L)
+        .title("tests111")
+        .content("test contentss  11")
+        .images(images)
+        .view(0)
         .build();
-        log.info("service insert before");
-        boardService.registBoard(boardReadDTO);
-        log.info("finish insert");
+        boardService.registBoard(boardDTO);
     }
 }

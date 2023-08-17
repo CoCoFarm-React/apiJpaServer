@@ -62,7 +62,9 @@ public class Board extends BaseEntity {
 
         images.add(bImage);
     }
-    
+    public void clearImages() {
+        images.clear();
+    }
 
     public void changeDelFlag(boolean delFlag) {
         this.delFlag = delFlag;

@@ -7,11 +7,13 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.project.apiserver.board.dto.BoardDTO;
 import com.project.apiserver.board.dto.BoardListDTO;
 import com.project.apiserver.board.dto.BoardReadDTO;
 import com.project.apiserver.board.entity.Board;
 import com.project.apiserver.board.repository.BoardRepository;
 import com.project.apiserver.common.Category;
+import com.project.apiserver.common.FileUploader;
 import com.project.apiserver.common.PageRequestDTO;
 import com.project.apiserver.common.PageResponseDTO;
 import com.project.apiserver.member.entity.MemberAccount;
@@ -25,6 +27,7 @@ import lombok.extern.log4j.Log4j2;
 public class BoardServiceImpl implements BoardService {
 
     private final BoardRepository boardRepository;
+    private final FileUploader fileUploader;
 
     @Override
     public PageResponseDTO<BoardListDTO> getList(PageRequestDTO pageRequestDTO) {
@@ -60,31 +63,39 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void registBoard(BoardReadDTO boardReadDTO) {
+    public Long registBoard(BoardDTO boardDTO) {
         log.info("service11111111111111111111111111111111111111111111111");
         // Board board = modelMapper.map(boardReadDTO, Board.class);
-        Category dtoCategory = Category.builder().cateno(boardReadDTO.getCateno()).catename(boardReadDTO.getCatename()).build();
-        MemberAccount accountDTO = MemberAccount.builder().mno(boardReadDTO.getMno()).build();
+        Category dtoCategory = Category.builder().cateno(boardDTO.getCateno()).build();
+        MemberAccount accountDTO = MemberAccount.builder().mno(boardDTO.getMno()).build();
         
         
 
 
         Board board = Board.builder()
-        .title(boardReadDTO.getTitle())
-        .content(boardReadDTO.getContent())
+        .title(boardDTO.getTitle())
+        .content(boardDTO.getContent())
         .category(dtoCategory)
         .member(accountDTO)
-        .view(boardReadDTO.getView())
+        .view(boardDTO.getView())
         .build();
+
+        boardDTO.getImages().forEach(img -> {
+            log.info(img);
+            board.addImage(img);
+            log.info("end of product add");
+        });
 
         log.info("Mapping data");
         boardRepository.save(board);
+        boardDTO.setBno(board.getBno());
+        return boardDTO.getBno();
     }
 
     
 
     @Override
-    public void deleteBoard(Long bno) {
+    public Long deleteBoard(Long bno) {
 
         Optional<Board> result = boardRepository.findById(bno);
 
@@ -96,20 +107,36 @@ public class BoardServiceImpl implements BoardService {
 
         boardRepository.save(board);
 
+        return bno;
 
     }
 
     @Override
-    public void modifyBoard(BoardReadDTO boardReadDTO) {
+    public Long modifyBoard(BoardDTO boardDTO) {
 
-        Optional<Board> result = boardRepository.findById(boardReadDTO.getBno());
+        Optional<Board> result = boardRepository.findById(boardDTO.getBno());
 
         Board board = result.orElseThrow();
 
-        board.changeContent(boardReadDTO.getContent());
-        board.changeTitle(boardReadDTO.getTitle());
+        board.changeContent(boardDTO.getContent());
+        board.changeTitle(boardDTO.getTitle());
+                // // 엔티티에 담긴 기존 이미지 이름 목록
+                List<String> oldFileNames = board.getImages().stream().map(pi -> pi.getFname()).collect(Collectors.toList());
+
+                board.clearImages();
+        
+                // dto의 파일 이름을 엔티티에 담고 저장
+                boardDTO.getImages().forEach(fname -> board.addImage(fname));
+                boardRepository.save(board);
+        
+                // 세이브 성공했으면 기존 파일들 중 productDTO.getImages()에 없는 파일 찾기
+                List<String> newFiles = boardDTO.getImages();
+                List<String> wantDeleteFiles = oldFileNames.stream().filter(f -> newFiles.indexOf(f) == -1).collect(Collectors.toList());
+        
+                fileUploader.removeFiles(wantDeleteFiles);
 
         boardRepository.save(board);
+        return boardDTO.getBno();
         
     }
 

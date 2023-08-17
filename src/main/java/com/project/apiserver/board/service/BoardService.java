@@ -2,6 +2,7 @@ package com.project.apiserver.board.service;
 
 
 
+import com.project.apiserver.board.dto.BoardDTO;
 import com.project.apiserver.board.dto.BoardListDTO;
 import com.project.apiserver.board.dto.BoardReadDTO;
 import com.project.apiserver.common.PageRequestDTO;
@@ -16,13 +17,13 @@ public interface BoardService {
 
   BoardReadDTO getOne(Long bno);
 
-   void registBoard(BoardReadDTO boardReadDTO);
+   Long registBoard(BoardDTO boardDTO);
 
    //삭제
-   void deleteBoard(Long bno);
+   Long deleteBoard(Long bno);
 
    //수정
-   void modifyBoard(BoardReadDTO boardReadDTO);
+   Long modifyBoard(BoardDTO boardDTO);
 
    PageResponseDTO<BoardListDTO> getListSameWriter(Long mno,PageRequestDTO pageRequestDTO);
    
