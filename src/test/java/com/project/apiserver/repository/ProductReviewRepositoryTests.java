@@ -1,14 +1,11 @@
 package com.project.apiserver.repository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -17,9 +14,7 @@ import org.springframework.test.annotation.Commit;
 import com.project.apiserver.member.entity.MemberAccount;
 import com.project.apiserver.member.repository.MemberRepository;
 import com.project.apiserver.productboard.entity.Product;
-import com.project.apiserver.productboard.entity.ProductImage;
 import com.project.apiserver.productboard.repository.ProductRepository;
-import com.project.apiserver.review.dto.ProductReviewDTO;
 import com.project.apiserver.review.entity.ProductReview;
 import com.project.apiserver.review.repository.ProductReviewRepository;
 

@@ -26,5 +26,12 @@ public class BoardFavoriteServiceImpl implements BoardFavoriteService {
     public Long countFavorite(Long bno) {
         return bFavoriteRepository.countSub(bno);
     }
+
+    @Override
+    public Long checkFavorite(Long bno, Long mno) {
+       
+        return bFavoriteRepository.checkFavorite(bno, mno);
+
+    }
     
 }

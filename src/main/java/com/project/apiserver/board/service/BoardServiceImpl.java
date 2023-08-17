@@ -66,6 +66,9 @@ public class BoardServiceImpl implements BoardService {
         Category dtoCategory = Category.builder().cateno(boardReadDTO.getCateno()).catename(boardReadDTO.getCatename()).build();
         MemberAccount accountDTO = MemberAccount.builder().mno(boardReadDTO.getMno()).build();
         
+        
+
+
         Board board = Board.builder()
         .title(boardReadDTO.getTitle())
         .content(boardReadDTO.getContent())

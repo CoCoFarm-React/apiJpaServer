@@ -37,6 +37,9 @@ public class ProductReadDTO {
 
     private String fname; // pi.fname에 해당하는 필드 추가
     private Integer view;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime regDate;
+    
     // @Builder.Default
     // private List<String> images = new ArrayList<>();
 

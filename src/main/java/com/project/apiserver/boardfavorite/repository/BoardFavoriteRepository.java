@@ -18,11 +18,13 @@ public interface BoardFavoriteRepository extends JpaRepository<BoardFavorite, Lo
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM tbl_board_favorite WHERE bno = :bno AND mno = :mno", nativeQuery = true)
+    @Query(value = "DELETE FROM tbl_board_favorite WHERE board_bno = :bno AND member_mno = :mno", nativeQuery = true)
     void deleteSubscriptionNative(@Param("bno") Long bno, @Param("mno") Long mno);
     
 
     @Query(value = "SELECT  COUNT(b) FROM BoardFavorite b WHERE b.board.bno = :bno GROUP BY b.board.bno")
     Long countSub(@Param("bno") Long bno);
-    
+
+    @Query(value = "SELECT count(*) from tbl_board_favorite where board_bno = :bno and member_mno = :mno", nativeQuery = true)
+    Long checkFavorite(@Param("bno") Long bno, @Param("mno") Long mno);
 }

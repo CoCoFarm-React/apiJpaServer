@@ -2,8 +2,6 @@ package com.project.apiserver.productboard.service;
 
 
 
-import java.util.List;
-
 import com.project.apiserver.common.PageRequestDTO;
 import com.project.apiserver.common.PageResponseDTO;
 import com.project.apiserver.productboard.dto.ProductDTO;

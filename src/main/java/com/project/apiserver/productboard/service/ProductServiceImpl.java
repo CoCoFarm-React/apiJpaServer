@@ -70,6 +70,7 @@ public class ProductServiceImpl implements ProductService {
         .procatename(list.get(0).getProcatename())
         .procateno(list.get(0).getProcateno())
         .view(list.get(0).getView())
+        .regDate(list.get(0).getRegDate())
         .build();
 
         log.info("-------------------------------");

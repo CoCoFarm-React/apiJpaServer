@@ -2,6 +2,7 @@ package com.project.apiserver.board.dto;
 
 import java.time.LocalDateTime;
 
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
@@ -39,5 +40,7 @@ public class BoardReadDTO {
     private String fname; //bi.fname에 해당하는 필드 추가
 
     private Integer view;
+
+
     
 }

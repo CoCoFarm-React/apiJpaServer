@@ -14,15 +14,18 @@ public interface ProductFavoriteRepository extends JpaRepository<ProductFavorite
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO tbl_product_favorite (member_mno, product_pno) VALUES (:mno, :pno)", nativeQuery = true)
-    void insertFavorite(@Param("pno") Long pno, @Param("mno") Long mno);
+    void insertFavorite(@Param("mno") Long mno,@Param("pno") Long pno);
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM tbl_product_favorite WHERE pno = :pno AND mno = :mno", nativeQuery = true)
+    @Query(value = "DELETE FROM tbl_product_favorite WHERE product_pno = :pno AND member_mno = :mno", nativeQuery = true)
     void deleteFavorite(@Param("pno") Long pno, @Param("mno") Long mno);
     
 
     @Query(value = "SELECT  COUNT(p) FROM ProductFavorite p WHERE p.product.pno = :pno GROUP BY p.product.pno")
     Long countFavorite(@Param("pno") Long pno);
+
+    @Query(value = "SELECT count(*) from tbl_product_favorite where product_pno = :pno and member_mno = :mno", nativeQuery = true)
+    Long checkFavorite(@Param("pno") Long pno, @Param("mno") Long mno);
     
 }

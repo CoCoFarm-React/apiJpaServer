@@ -3,9 +3,7 @@ package com.project.apiserver.review.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.ColumnDefault;
 
-import com.project.apiserver.board.entity.Board;
 import com.project.apiserver.common.BaseEntity;
 
 

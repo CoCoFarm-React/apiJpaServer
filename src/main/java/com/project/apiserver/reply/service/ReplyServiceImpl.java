@@ -8,7 +8,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.project.apiserver.common.PageResponseDTO;
@@ -46,7 +45,7 @@ public class ReplyServiceImpl extends Exception implements ReplyService{
 
 
 
-        Pageable pageable = PageRequest.of(pageNum - 1, requestDTO.getSize(), Sort.by("rno").ascending());
+        Pageable pageable = PageRequest.of(pageNum - 1, requestDTO.getSize());
 
         log.info("==================2222=================");
         log.info(requestDTO.getBno());
@@ -77,24 +76,31 @@ public class ReplyServiceImpl extends Exception implements ReplyService{
 
         log.info("==========33333==============");
 
-
-
-        if(replyDTO.getGno()!=null){
-            replyDTO.setOrd(Boolean.TRUE);
-            replyDTO.setGno(replyDTO.getGno());
-        }
-        else{
-            replyDTO.setOrd(Boolean.FALSE);
-            replyDTO.setGno(replyDTO.getRno());
-        }
+        log.info(replyDTO.getGno());
+        log.info(replyDTO.isOrd());
 
         Reply reply = modelMapper.map(replyDTO, Reply.class);
 
         MemberAccount memberAccount = MemberAccount.builder().mno(replyDTO.getMno()).build();
 
         reply.setMember(memberAccount);
-        
+       
         replyRepository.save(reply);
+        Boolean changeOrd= !replyDTO.isOrd();
+        log.info(changeOrd);
+        log.info(reply);
+        if(replyDTO.getGno()!=null){
+            reply.changeOrd(changeOrd);
+            replyDTO.setGno(reply.getGno());
+            replyRepository.save(reply);
+        }
+        else{
+            replyDTO.setOrd(replyDTO.isOrd());
+            replyDTO.setGno(reply.getRno());
+            reply.setGno(reply.getRno());
+            replyRepository.save(reply);
+        }
+       
 
     }
 

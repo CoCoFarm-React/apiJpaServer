@@ -24,32 +24,40 @@ public class BoardFavoriteController {
      private final BoardFavoriteService bFavoriteService;
 
     @PostMapping("{bno}")
-    public Map<String, String> addSubscription(MemberAccountDTO account,
+    public Map<String, String> addFavorite(MemberAccountDTO account,
             @PathVariable("bno") Long bno) {
 
         MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
 
-        bFavoriteService.incrementFavorite(dto.getMno(), bno);
+        bFavoriteService.incrementFavorite(bno,dto.getMno());
 
         return Map.of("result", "Success");
 
     }
 
-    @DeleteMapping("{bno}")
-    public Map<String, String> deleteSubscription(MemberAccountDTO account,
+    @DeleteMapping("{bno}/{email}")
+    public Map<String, String> deleteFavorite(@PathVariable("email") String account,
             @PathVariable("bno") Long bno) {
 
-        MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
+        MemberAccountDTO dto = memberService.getInfoByEmail(account);
 
-        bFavoriteService.deleteFavorite(dto.getMno(), bno);
+        bFavoriteService.deleteFavorite(bno,dto.getMno());
 
         return Map.of("result", "Success");
 
     }
     @GetMapping("{bno}")
-    public Long countSubscription(@PathVariable("bno") Long bno){
+    public Long countFavorite(@PathVariable("bno") Long bno){
 
         return bFavoriteService.countFavorite(bno);
+    }
+    @GetMapping("{bno}/check")
+    public Long checkFavorite(MemberAccountDTO account,
+            @PathVariable("bno") Long bno) {
+
+        MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
+
+        return bFavoriteService.checkFavorite(bno, dto.getMno());
     }
     
 }

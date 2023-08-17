@@ -3,6 +3,9 @@ package com.project.apiserver.repository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import com.project.apiserver.member.entity.MemberAccount;
 import com.project.apiserver.subscription.repository.SubscriptionRepository;
@@ -55,6 +58,14 @@ public class SubscriptionRepositoryTests {
         log.info(subRepository.countSub(toAccount.getMno()));
 
         
+    }
+    @Test
+    public void getListSubfromTest(){
+        Long value= 4L;
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<MemberAccount> result = subRepository.getListSubfrom(value,pageable);
+
+        result.get().forEach(data->log.info(data));
     }
 
 }

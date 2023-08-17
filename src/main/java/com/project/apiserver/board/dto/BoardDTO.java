@@ -21,8 +21,7 @@ import lombok.ToString;
 @Builder  
 public class BoardDTO {
  
-
-private Long bno;
+    private Long bno;
     private String title;
     private String content;
     private String email;
@@ -43,6 +42,7 @@ private Long bno;
     private String fname; //bi.fname에 해당하는 필드 추가
 
     private Integer view;
+
     @Builder.Default
     private List<String> images = new ArrayList<>();
 
