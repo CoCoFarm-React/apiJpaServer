@@ -23,10 +23,10 @@ public class ProductFavoriteController {
     private final ProductFavoriteService pFavoriteService;
 
     @PostMapping("{pno}")
-    public Map<String, String> addfavorite(String account,
+    public Map<String, String> addfavorite(MemberAccountDTO account,
             @PathVariable("pno") Long pno) {
 
-        MemberAccountDTO dto = memberService.getInfoByEmail(account);
+        MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
 
         pFavoriteService.incrementFavorite(dto.getMno(), pno);
 
