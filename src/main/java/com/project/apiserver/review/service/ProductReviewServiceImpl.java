@@ -38,7 +38,7 @@ public class ProductReviewServiceImpl implements ProductReviewService {
 
         int pageNum = dto.getPage();
 
-        Pageable pageable = PageRequest.of(0, 10, Sort.by("rno").descending());
+        Pageable pageable = PageRequest.of(pageNum - 1, 10, Sort.by("rno").descending());
 
         Page<ProductReviewDTO> result = repository.getReviewList(dto.getPno(), pageable);
         long totalCount = result.getTotalElements();

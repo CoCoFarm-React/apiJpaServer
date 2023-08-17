@@ -142,4 +142,16 @@ public class ProductReviewRepositoryTests {
 
     }
 
+    // 이미지
+    @Test
+    @Transactional
+    @Commit
+    public void imageTest(){
+
+        List<ProductReviewDTO> result = repository.readReview(207L);
+
+        log.info(result);
+
+    }
+
 }

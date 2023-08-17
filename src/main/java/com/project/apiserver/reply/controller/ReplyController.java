@@ -44,9 +44,9 @@ public class ReplyController {
     }
 
 
-    
+    // 등록
     @PostMapping("")
-    public Map<String, String> registReply(@RequestBody ReplyDTO replyDTO) {
+    public Map<String, Long> registReply(@RequestBody ReplyDTO replyDTO) {
  
         log.info("--------------111-------------");
         log.info("--------------replyDTO------------- insert test");
@@ -55,30 +55,30 @@ public class ReplyController {
 
         log.info("--------------222-------------");
 
-        return Map.of("result", "success");
+        return Map.of("result", replyDTO.getRno());
 
     }
 
     // 삭제
     @DeleteMapping("{rno}")
-    public Map<String, String> deleteReply(@PathVariable("rno") Long rno) {
+    public Map<String, Long> deleteReply(@PathVariable("rno") Long rno) {
 
         log.info("Delete ........................ reply...........");
 
         replyService.deleteReply(rno);
 
-        return Map.of("result", "success");
+        return Map.of("result", rno);
 
     }
 
     // 댓글 수정
     @PutMapping("")
-    public Map<String, String> modifyReply(@RequestBody ReplyDTO replyDTO) {
+    public Map<String, Long> modifyReply(@RequestBody ReplyDTO replyDTO) {
 
  
         replyService.modifyReply(replyDTO);
 
-        return Map.of("result", "success");
+        return Map.of("result", replyDTO.getRno());
 
     }
 

@@ -33,17 +33,18 @@ public class ProductReviewDTO {
 
     private String fname;
 
-    // @Builder.Default
+    // @Builder.Defaul
+    
     // private List<String> images = new ArrayList<>();
-
+    
     // // 등록, 수정 업로드 된 파일 데이터를 수집하는 용도
     // @Builder.Default
     // private List<MultipartFile> files = new ArrayList<>();
-
+    
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regDate;
-
+    
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime modDate;
-    
+
 }

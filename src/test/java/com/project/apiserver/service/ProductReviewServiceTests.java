@@ -26,7 +26,7 @@ public class ProductReviewServiceTests {
     @Test
     public void getListTest(){
 
-        ProductReviewPageRequestDTO dto = ProductReviewPageRequestDTO.builder().pno(636L).build();
+        ProductReviewPageRequestDTO dto = ProductReviewPageRequestDTO.builder().pno(661L).build();
 
         log.info(service.getList(dto));
 

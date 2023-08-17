@@ -3,6 +3,7 @@ package com.project.apiserver.review.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 @RequestMapping("/api/reviews")
 @Log4j2
+@CrossOrigin
 public class ProductReviewController {
 
     private final ProductReviewService service;
@@ -50,8 +52,11 @@ public class ProductReviewController {
     }
 
     // 등록
-    @PostMapping("/")
+    @PostMapping("")
     public Map<String, String> register(ProductReviewReadDTO dto){
+
+        log.info("dto...................................");
+        log.info(dto);
 
         List<String> fileNames = fileUploader.uploadFiles(dto.getFiles(), true);
         dto.setImages(fileNames);
@@ -64,24 +69,26 @@ public class ProductReviewController {
 
     // 삭제
     @DeleteMapping("/{rno}")
-    public Map<String, String> delete(@PathVariable Long rno){
+    public Map<String, Long> delete(@PathVariable Long rno){
 
         service.delete(rno);
 
-        return Map.of("result", "success");
+        return Map.of("result", rno);
 
     }
 
     // 수정
-    @PutMapping("/")
-    public Map<String, String> modify(ProductReviewReadDTO dto){
+    @PutMapping("")
+    public Map<String, Long> modify(ProductReviewReadDTO dto){
 
-        List<String> fileNames = fileUploader.uploadFiles(dto.getFiles(), true);
-        dto.setImages(fileNames);
+        if(dto.getFiles() != null && dto.getFiles().size() > 0) {
+            List<String> fileNames = fileUploader.uploadFiles(dto.getFiles(), true);
+            dto.setImages(fileNames);
+        }
 
         service.modify(dto);
 
-        return Map.of("result", "success");
+        return Map.of("result", dto.getRno());
 
     }
     
