@@ -29,7 +29,7 @@ public class BoardFavoriteController {
 
         MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
 
-        bFavoriteService.incrementFavorite(dto.getMno(), bno);
+        bFavoriteService.incrementFavorite(bno,dto.getMno());
 
         return Map.of("result", "Success");
 
@@ -41,7 +41,7 @@ public class BoardFavoriteController {
 
         MemberAccountDTO dto = memberService.getInfoByEmail(account);
 
-        bFavoriteService.deleteFavorite(dto.getMno(), bno);
+        bFavoriteService.deleteFavorite(bno,dto.getMno());
 
         return Map.of("result", "Success");
 

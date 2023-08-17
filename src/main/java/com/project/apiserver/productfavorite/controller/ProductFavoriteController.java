@@ -13,10 +13,12 @@ import com.project.apiserver.member.service.MemberService;
 import com.project.apiserver.productfavorite.service.ProductFavoriteService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @RestController
 @RequestMapping("/api/productfavorite/")
 @RequiredArgsConstructor
+@Log4j2
 public class ProductFavoriteController {
 
     private final MemberService memberService;
@@ -25,9 +27,10 @@ public class ProductFavoriteController {
     @PostMapping("{pno}")
     public Map<String, String> addfavorite(MemberAccountDTO account,
             @PathVariable("pno") Long pno) {
-
+        log.info("-------------------------");
+        log.info("account " +account);
         MemberAccountDTO dto = memberService.getInfoByEmail(account.getEmail());
-
+        log.info(dto.getMno());
         pFavoriteService.incrementFavorite(dto.getMno(), pno);
 
         return Map.of("result", "Success");
@@ -37,10 +40,10 @@ public class ProductFavoriteController {
     @DeleteMapping("{pno}/{email}")
     public Map<String, String> deletefavorite(@PathVariable("email") String account,
             @PathVariable("pno") Long pno) {
-
+            
         MemberAccountDTO dto = memberService.getInfoByEmail(account);
-
-        pFavoriteService.deleteFavorite(dto.getMno(), pno);
+        log.info(dto.getMno()+"-----"+ pno);
+        pFavoriteService.deleteFavorite(pno,dto.getMno());
 
         return Map.of("result", "Success");
 

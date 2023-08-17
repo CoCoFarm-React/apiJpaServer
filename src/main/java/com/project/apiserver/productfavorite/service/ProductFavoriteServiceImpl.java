@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import com.project.apiserver.productfavorite.repository.ProductFavoriteRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 
 @Service
 @RequiredArgsConstructor
+@Log4j2
 public class ProductFavoriteServiceImpl implements ProductFavoriteService{
     private final ProductFavoriteRepository pFavoriteRepository;
 
@@ -18,6 +20,7 @@ public class ProductFavoriteServiceImpl implements ProductFavoriteService{
 
     @Override
     public void deleteFavorite(Long pno, Long mno) {
+        log.info("--------------------------");
        pFavoriteRepository.deleteFavorite(pno, mno);
     }
 
