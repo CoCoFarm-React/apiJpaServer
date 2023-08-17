@@ -18,7 +18,7 @@ public interface BoardFavoriteRepository extends JpaRepository<BoardFavorite, Lo
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM tbl_board_favorite WHERE bno = :bno AND mno = :mno", nativeQuery = true)
+    @Query(value = "DELETE FROM tbl_board_favorite WHERE board_bno = :bno AND member_mno = :mno", nativeQuery = true)
     void deleteSubscriptionNative(@Param("bno") Long bno, @Param("mno") Long mno);
     
 
