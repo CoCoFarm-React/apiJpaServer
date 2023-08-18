@@ -35,21 +35,20 @@ public class BoardRepositoryTests {
 
         Category category = Category
         .builder()
-        .cateno(2)
-        .catename("재배일지")
+        .cateno(1)
         .build();
 
         MemberAccount member = MemberAccount.builder().mno(4L).build();
         
         log.info("Start insert");
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
 
             Board board = Board.builder()
                     .category(category)
                     .member(member)
-                    .title("재배일지" + i)
-                    .content("재배일지 내용" + i)
+                    .title("상품 문의")
+                    .content("상품 문의합니다.")
                     .build();
 
             boardRepository.save(board);
