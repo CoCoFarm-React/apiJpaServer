@@ -50,7 +50,7 @@ public class OAuthAPILoginSuccessHandler implements AuthenticationSuccessHandler
     // URL에 적용가능한 무자열로 변환 redirect는 get방식만 되기떄문에
     String encodeStr = URLEncoder.encode(jsonStr, "UTF-8");
       
-    response.sendRedirect("http://localhost:3000/member/loginhandler?data="+encodeStr);
+    response.sendRedirect("http://enduser-env.eba-pw3vprcd.ap-northeast-2.elasticbeanstalk.com/member/loginhandler?data="+encodeStr);
  
   }
  
