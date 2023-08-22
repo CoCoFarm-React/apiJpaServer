@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport
 import com.project.apiserver.board.dto.BoardListDTO;
 import com.project.apiserver.board.entity.Board;
 import com.project.apiserver.board.entity.QBoard;
+import com.project.apiserver.board.entity.QBoardImage;
 import com.project.apiserver.common.PageRequestDTO;
 import com.project.apiserver.common.PageResponseDTO;
 import com.project.apiserver.common.QCategory;
@@ -36,6 +37,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
         QCategory qCategory = QCategory.category;
         QReply qReply = QReply.reply1;
 
+
         String keyword = pageRequestDTO.getKeyword();
         String searchType = pageRequestDTO.getType();
         Integer cateno1 = pageRequestDTO.getCateno();
@@ -53,6 +55,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
 
         searchQuery.where(qBoard.category.cateno.eq(cateno1));
         searchQuery.where(qBoard.delFlag.eq(Boolean.FALSE));
+
 
         log.info("-------------------------------------3");
         if (keyword != null && searchType != null) {
@@ -77,6 +80,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
         this.getQuerydsl().applyPagination(pageable, searchQuery);
 
         searchQuery.groupBy(qBoard);
+
         JPQLQuery<BoardListDTO> listQuery = searchQuery.select(Projections.bean(
                 BoardListDTO.class,
                 qBoard.bno,
@@ -88,6 +92,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
                 qBoard.category.cateno,
                 qBoard.regDate,
                 qBoard.view,
+
                 qReply.countDistinct().as("rcnt")));
 
         long totalCount = listQuery.fetchCount();
@@ -107,6 +112,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
         QCategory qCategory = QCategory.category;
         QReply qReply = QReply.reply1;
 
+
         String keyword = pageRequestDTO.getKeyword();
         String searchType = pageRequestDTO.getType();
         Integer cateno1 = pageRequestDTO.getCateno();
@@ -118,6 +124,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
 
         searchQuery.leftJoin(qBoard.category, qCategory);
         searchQuery.leftJoin(qBoard.member, qMember);
+
         searchQuery.leftJoin(qReply).on(qReply.board.eq(qBoard));
 
         log.info("--------------------------------------2");
@@ -125,6 +132,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
         searchQuery.where(qBoard.category.cateno.eq(cateno1));
         searchQuery.where(qBoard.member.mno.eq(mno));
         searchQuery.where(qBoard.delFlag.eq(Boolean.FALSE));
+
 
         log.info("-------------------------------------3");
         if (keyword != null && searchType != null) {
@@ -148,6 +156,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
         this.getQuerydsl().applyPagination(pageable, searchQuery);
 
         searchQuery.groupBy(qBoard);
+     
         JPQLQuery<BoardListDTO> listQuery = searchQuery.select(Projections.bean(
                 BoardListDTO.class,
                 qBoard.bno,
@@ -159,6 +168,7 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
                 qBoard.category.cateno,
                 qBoard.regDate,
                 qBoard.view,
+  
                 qReply.countDistinct().as("rcnt")));
 
         long totalCount = listQuery.fetchCount();
